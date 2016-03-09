@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ECMAScript6的新特性--数据类型 
+   </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="####1 let命令ECMAScript6新增了let命令，用来声明变量。它的用法类似与var,但是所声明的变量只在let命令所在的代码块有效。
+for(let i=0;i&amp;lt;5;i++){
+    console.log(i);
+}
+console.log(i);//error
+上面代码在for循环代码块中输出i的值时 输出的值分别为0、1、2、3、4、5，但在for循环外输出i的值时，系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ECMAScript6的新特性--数据类型">
+<meta property="og:url" content="http://yoursite.com/2016/03/09/es6-data/index.html">
+<meta property="og:site_name" content="charlene0824's blog">
+<meta property="og:description" content="####1 let命令ECMAScript6新增了let命令，用来声明变量。它的用法类似与var,但是所声明的变量只在let命令所在的代码块有效。
+for(let i=0;i&amp;lt;5;i++){
+    console.log(i);
+}
+console.log(i);//error
+上面代码在for循环代码块中输出i的值时 输出的值分别为0、1、2、3、4、5，但在for循环外输出i的值时，系">
+<meta property="og:updated_time" content="2016-03-09T05:18:00.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ECMAScript6的新特性--数据类型">
+<meta name="twitter:description" content="####1 let命令ECMAScript6新增了let命令，用来声明变量。它的用法类似与var,但是所声明的变量只在let命令所在的代码块有效。
+for(let i=0;i&amp;lt;5;i++){
+    console.log(i);
+}
+console.log(i);//error
+上面代码在for循环代码块中输出i的值时 输出的值分别为0、1、2、3、4、5，但在for循环外输出i的值时，系">
+  
+    <link rel="alternate" href="/atom.xml" title="charlene0824&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">charlene0824&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">walk steps step by step</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-es6-data" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+  <div class="article-inn">
+  <div class="article-meta">
+    <span class="glyphicon" "glyphicon-calendar" aria-hidden="true"></span>
+    <a href="/2016/03/09/es6-data/" class="article-date">
+  <time datetime="2016-03-09T01:45:43.000Z" itemprop="datePublished">2016-03-09</time>
+</a>
+    
+  </div>
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ECMAScript6的新特性--数据类型
+    </h1>
+  
+
+      </header>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>####1 let命令<br>ECMAScript6新增了let命令，用来声明变量。它的用法类似与var,<br>但是所声明的变量只在let命令所在的代码块有效。<br></p>
+<pre><code>for(let i=0;i&lt;5;i++){
+    console.log(i);
+}
+console.log(i);//error
+</code></pre><p>上面代码在for循环代码块中输出i的值时 输出的值分别为0、1、2、3、4、5，<br>但在for循环外输出i的值时，系统报错。这表明let声明的变量只有在它所在的<br>代码块有效</p>
+<pre><code>var list = document.getElementById(&quot;list&quot;);
+
+for (var i = 1; i &lt;= 5; i++) {
+  var item = document.createElement(&quot;LI&quot;);
+  item.appendChild(document.createTextNode(&quot;Item &quot; + i));
+  let j = i;
+  item.onclick = function (ev) {
+    console.log(&quot;Item &quot; + j + &quot; is clicked.&quot;);
+  };
+  list.appendChild(item);
+}
+</code></pre><p>上面这段代码的意图是创建5个li,点击不同的li能够打印出当前li的序号。如果不用let，而改用var的话，将总是打印出 Item 5 is Clicked，因为 j 是函数级变量，5个内部函数都指向了同一个 j ,而 j 最后一次赋值是5。用了let后，j 变成块级域（也就是花括号中的块，每进入一次花括号就生成了一个块级域）,所以 5 个内部函数指向了不同的 j 。</p>
+<p>let不允许在相同的作用域内，重复声明同一个变量</p>
+<pre><code>{let a=10;
+    var a=1;
+    //error
+}
+</code></pre><p>let 实际上为js新增了块级作用域</p>
+<pre><code>function f1(){
+    let n=5;
+    if(true){
+    let n=10;
+}
+console.log(n);//5
+}
+</code></pre><p>需要注意的是，let声明的变量不存在“变量提升”的现象</p>
+<pre><code>console.log(x);
+let x=10;
+</code></pre><p>上述代码会报错，表示x没有定义。如果用var声明x，不会报错 输出undefined</p>
+<p>####2 const命令</p>
+<p>const也用来声明变量，但是声明的是常量。一旦声明，常量的值就不会改变</p>
+<pre><code>const PI=3.1415;
+console.log(PI);//3.1415
+PI=3;
+console.log(PI)//3.1415
+const PI=3.1;
+console.log(PI);//3.1415
+</code></pre><p>const的作用域与var命令相同：如果在全局环境中国声明，常量就在全局环境中<br>有效，如果在函数内声明，常量就在函数体内有效。</p>
+<p>####3 set数据结构</p>
+<p>ES6提供了新的数据结构Set。它类似于数组，但是成员的值都是唯一的，<br>没有重复的值<br><br>Set本身是一个构造函数，用来生成Set数据结构</p>
+<pre><code>var s=new Set();
+[2,3,4,5,3,6,1,2,3].map(x=&gt;s.add(x));
+for(i of s){
+    console.log(i);//2,3,4,5,6,1
+}
+</code></pre><p>上面代码通过add方法向Set结构加入成员，结构表明Set结构不会加入重复值。<br><br>Set函数可以接受一个数组作为参数，用来初始化。</p>
+<pre><code>var items=new Set([1,2,3,4,3,2,1]);
+console.log(items);//Set{1,2,3,4}
+</code></pre><p>向Set加入值的时候，不会发生类型转换，5和”5”是另个不相同的值</p>
+<pre><code>var items=new Set([1,2,3,4,3&quot;,2,1]);
+console.log(items);//Set{1,2,3,4,&quot;3&quot;}
+</code></pre><p>属性和方法</p>
+<p>Set结构有以下属性</p>
+<ul>
+<li>Set.prototype.constructor:构造函数，默认值就是Set函数</li>
+<li><p>Set.prototype.size:返回Set成员总数<br>Set数据结构有以下方法</p>
+</li>
+<li><p>add(value)：添加某个值，返回Set结构本身</p>
+</li>
+<li>delete(value): 删除某个值，返回一个布尔值，表示删除是否成功</li>
+<li>has(value): 返回一个布尔值，表示该值是否为Set的成员</li>
+<li><p>clear(): 清除所有成员<br>Set属性和方法的使用<br></p>
+<p>  var items=new Set();<br>  items.add(3).add(5).add(2).add(3);<br>  console.log(items.size);//3<br>  console.log(items.has(3));//true<br>  console.log(items.has(1));//false<br>  console.log(items.delete(2));//true<br>  console.log(items.has(2));//false</p>
+</li>
+</ul>
+<p>Array.from方法可以将Set结构转为数组</p>
+<pre><code>var items=new Set([1,2,4,5,2,]);
+console.log(Object.prototype.toString.call(items));//[object Set]
+var arr=Array.from(items);
+console.log(Object.prototype.toString.call(items));//[object Array]
+</code></pre><p>Set的遍历操作</p>
+<p>Set的默认遍历器是values方法</p>
+<pre><code>let set=new Set([&quot;red&quot;,&quot;green&quot;,&quot;blue&quot;]);
+for(let x of set){
+    console.log(x);//red green blue
+}
+</code></pre><p>扩展运算符(…)内部使用for…of循环，所以也可用于Set结构</p>
+<pre><code>var arr1=[1,2,3,4,2,1];
+var unique=[...new Set(arr1)];
+console.log(unique);
+</code></pre><p>该方法可以作为一种数组去重的方法</p>
+<p>####Map<br>js的对象本质上时键值对的集合，但是只能用字符串当做键</p>
+<pre><code>var data={};
+var ele=document.getElementById(&quot;MyDiv&quot;);
+data[element]=metadata;
+</code></pre><p>该代码愿意是将一个DOM节点作为对象的键，但是由于对象只接受字符串作为键值，<br>所以element被自动转为字符串</p>
+<p>为了解决这个问题，ES6提供了map数据结构，它类似于对象，也是键值对的集合，<br>但是键的范围不限于字符串，各种类型的值（包括对象）都可以当做键</p>
+<p>Map是ES6新增的有序键值对集合。其基本思想就是把一个值映射给一个唯一的键，<br>这样在任何时刻，都能根据该键获取到对应的值。也就是说，object结构提供了“字符串-值”的对用，Map结构提供了“值-值”的对应。</p>
+<pre><code>var m = new Map();
+var o = {p: &quot;Hello World&quot;};
+m.set(o, &quot;content&quot;)
+m.get(o) // &quot;content&quot;
+m.has(o) // true
+m.delete(o) // true
+m.has(o) // false
+</code></pre><p>上面代码使用set方法，将对象o当作m的一个键，然后又使用get方法读取这个键，接着使用delete方法删除了这个键。</p>
+<p>作为构造函数，Map也可以接受一个数组作为参数。该数组的成员是一个个表示键值对的数组。</p>
+<pre><code>var map = new Map([ [&quot;name&quot;, &quot;张三&quot;], [&quot;title&quot;, &quot;Author&quot;]]);
+
+map.size // 2
+map.has(&quot;name&quot;) // true
+map.get(&quot;name&quot;) // &quot;张三&quot;
+map.has(&quot;title&quot;) // true
+map.get(&quot;title&quot;) // &quot;Author&quot;
+</code></pre><p>Map的键实际上是跟内存地址绑定的，只要内存地址不一样，就视为两个键。这就解决了同名属性碰撞（clash）的问题，我们扩展别人的库的时候，如果使用对象作为键名，就不用担心自己的属性与原作者的属性同名。</p>
+<p>Map数据结构的属性和方法</p>
+<ul>
+<li>size：返回成员总数。</li>
+<li>set(key, value)：设置key所对应的键值，然后返回整个Map结构。如果key已经有值，则键值会被更新，否则就新生成该键。</li>
+<li>get(key)：读取key对应的键值，如果找不到key，返回undefined。</li>
+<li>has(key)：返回一个布尔值，表示某个键是否在Map数据结构中。</li>
+<li>delete(key)：删除某个键，返回true。如果删除失败，返回false。</li>
+<li>clear()：清除所有成员，没有返回值。</li>
+</ul>
+<p>Map数据结构的遍历</p>
+<p>Map原生提供三个遍历器。</p>
+<p>keys()：返回键名的遍历器。<br><br>values()：返回键值的遍历器。<br><br>entries()：返回所有成员的遍历器。<br></p>
+<pre><code>let map = new Map([
+  [&apos;F&apos;, &apos;no&apos;],
+  [&apos;T&apos;,  &apos;yes&apos;],
+]);
+
+for (let key of map.keys()) {
+  console.log(key);
+}
+// &quot;F&quot;
+// &quot;T&quot;
+
+for (let value of map.values()) {
+  console.log(value);
+}
+// &quot;no&quot;
+// &quot;yes&quot;
+
+for (let item of map.entries()) {
+  console.log(item[0], item[1]);
+}
+// &quot;F&quot; &quot;no&quot;
+// &quot;T&quot; &quot;yes&quot;
+
+// 或者
+for (let [key, value] of map.entries()) {
+  console.log(key, value);
+}
+
+// 等同于使用map.entries()
+for (let [key, value] of map) {
+  console.log(key, value);
+}
+</code></pre><p>上面代码最后的那个例子，表示Map结构的默认遍历器就是entires方法</p>
+<p>Map结构转为数组结构，比较快速的方法是结合使用扩展运算符（…）</p>
+<pre><code>let map = new Map([
+  [1, &apos;one&apos;],
+  [2, &apos;two&apos;],
+  [3, &apos;three&apos;],
+]);
+
+[...map.keys()]
+// [1, 2, 3]
+
+[...map.values()]
+// [&apos;one&apos;, &apos;two&apos;, &apos;three&apos;]
+
+[...map.entries()]
+// [[1,&apos;one&apos;], [2, &apos;two&apos;], [3, &apos;three&apos;]]
+
+[...map]
+// [[1,&apos;one&apos;], [2, &apos;two&apos;], [3, &apos;three&apos;]]
+</code></pre><p>参考文献：<a href="http://javascript.ruanyifeng.com/advanced/ecmascript6.html" target="_blank" rel="external">javascript标准参考教程</a><br><a href="https://wohugb.gitbooks.io/ecmascript-6/content/docs/set-map./html" target="_blank" rel="external">ECMAScript6入门</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+          <p class="article-more-link">
+            <a href="/2016/03/09/es6-data/#more">阅读更多</a>
+          </p>
+        
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/08/protperty/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">前端性能优化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo主题/">hexo主题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/makedown，初级/">makedown，初级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ECMAScript6/" style="font-size: 10px;">ECMAScript6</a> <a href="/tags/hexo主题/" style="font-size: 10px;">hexo主题</a> <a href="/tags/makedown，初级/" style="font-size: 10px;">makedown，初级</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/09/es6-data/">ECMAScript6的新特性--数据类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/08/protperty/">前端性能优化</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/07/ajax/">ajax的用法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/07/sort/">js实现排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/06/hexo/">hexo主题修改</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 charlene<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

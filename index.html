@@ -15,16 +15,19 @@
 <meta name="twitter:title" content="charlene0824's blog">
 <meta name="twitter:description">
   
-    <link rel="alternative" href="/atom.xml" title="charlene0824&#39;s blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="charlene0824&#39;s blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
   <link rel="stylesheet" href="/css/style.css" type="text/css">
   
 
 </head>
+
 <body>
   <div id="container">
     <div id="wrap">
@@ -54,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -65,38 +68,618 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-My-New-Post" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-es6-data" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+  <div class="article-inn">
   <div class="article-meta">
-    <a href="/2016/02/24/My-New-Post/" class="article-date">
-  <time datetime="2016-02-24T08:04:21.000Z" itemprop="datePublished">2016-02-24</time>
+    <span class="glyphicon" "glyphicon-calendar" aria-hidden="true"></span>
+    <a href="/2016/03/09/es6-data/" class="article-date">
+  <time datetime="2016-03-09T01:45:43.000Z" itemprop="datePublished">2016-03-09</time>
 </a>
     
   </div>
-  <div class="article-inner">
     
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/My-New-Post/">第一篇文章</a>
+      <a class="article-title" href="/2016/03/09/es6-data/">ECMAScript6的新特性--数据类型</a>
     </h1>
   
 
       </header>
+      </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#欢迎</p>
+        <p>####1 let命令<br>ECMAScript6新增了let命令，用来声明变量。它的用法类似与var,<br>但是所声明的变量只在let命令所在的代码块有效。<br></p>
+<pre><code>for(let i=0;i&lt;5;i++){
+    console.log(i);
+}
+console.log(i);//error
+</code></pre><p>上面代码在for循环代码块中输出i的值时 输出的值分别为0、1、2、3、4、5，<br>但在for循环外输出i的值时，系统报错。这表明let声明的变量只有在它所在的<br>代码块有效</p>
+<pre><code>var list = document.getElementById(&quot;list&quot;);
+
+for (var i = 1; i &lt;= 5; i++) {
+  var item = document.createElement(&quot;LI&quot;);
+  item.appendChild(document.createTextNode(&quot;Item &quot; + i));
+  let j = i;
+  item.onclick = function (ev) {
+    console.log(&quot;Item &quot; + j + &quot; is clicked.&quot;);
+  };
+  list.appendChild(item);
+}
+</code></pre><p>上面这段代码的意图是创建5个li,点击不同的li能够打印出当前li的序号。如果不用let，而改用var的话，将总是打印出 Item 5 is Clicked，因为 j 是函数级变量，5个内部函数都指向了同一个 j ,而 j 最后一次赋值是5。用了let后，j 变成块级域（也就是花括号中的块，每进入一次花括号就生成了一个块级域）,所以 5 个内部函数指向了不同的 j 。</p>
+<p>let不允许在相同的作用域内，重复声明同一个变量</p>
+<pre><code>{let a=10;
+    var a=1;
+    //error
+}
+</code></pre><p>let 实际上为js新增了块级作用域</p>
+<pre><code>function f1(){
+    let n=5;
+    if(true){
+    let n=10;
+}
+console.log(n);//5
+}
+</code></pre><p>需要注意的是，let声明的变量不存在“变量提升”的现象</p>
+<pre><code>console.log(x);
+let x=10;
+</code></pre><p>上述代码会报错，表示x没有定义。如果用var声明x，不会报错 输出undefined</p>
+<p>####2 const命令</p>
+<p>const也用来声明变量，但是声明的是常量。一旦声明，常量的值就不会改变</p>
+<pre><code>const PI=3.1415;
+console.log(PI);//3.1415
+PI=3;
+console.log(PI)//3.1415
+const PI=3.1;
+console.log(PI);//3.1415
+</code></pre><p>const的作用域与var命令相同：如果在全局环境中国声明，常量就在全局环境中<br>有效，如果在函数内声明，常量就在函数体内有效。</p>
+<p>####3 set数据结构</p>
+<p>ES6提供了新的数据结构Set。它类似于数组，但是成员的值都是唯一的，<br>没有重复的值<br><br>Set本身是一个构造函数，用来生成Set数据结构</p>
+<pre><code>var s=new Set();
+[2,3,4,5,3,6,1,2,3].map(x=&gt;s.add(x));
+for(i of s){
+    console.log(i);//2,3,4,5,6,1
+}
+</code></pre><p>上面代码通过add方法向Set结构加入成员，结构表明Set结构不会加入重复值。<br><br>Set函数可以接受一个数组作为参数，用来初始化。</p>
+<pre><code>var items=new Set([1,2,3,4,3,2,1]);
+console.log(items);//Set{1,2,3,4}
+</code></pre><p>向Set加入值的时候，不会发生类型转换，5和”5”是另个不相同的值</p>
+<pre><code>var items=new Set([1,2,3,4,3&quot;,2,1]);
+console.log(items);//Set{1,2,3,4,&quot;3&quot;}
+</code></pre><p>属性和方法</p>
+<p>Set结构有以下属性</p>
+<ul>
+<li>Set.prototype.constructor:构造函数，默认值就是Set函数</li>
+<li><p>Set.prototype.size:返回Set成员总数<br>Set数据结构有以下方法</p>
+</li>
+<li><p>add(value)：添加某个值，返回Set结构本身</p>
+</li>
+<li>delete(value): 删除某个值，返回一个布尔值，表示删除是否成功</li>
+<li>has(value): 返回一个布尔值，表示该值是否为Set的成员</li>
+<li><p>clear(): 清除所有成员<br>Set属性和方法的使用<br></p>
+<p>  var items=new Set();<br>  items.add(3).add(5).add(2).add(3);<br>  console.log(items.size);//3<br>  console.log(items.has(3));//true<br>  console.log(items.has(1));//false<br>  console.log(items.delete(2));//true<br>  console.log(items.has(2));//false</p>
+</li>
+</ul>
+<p>Array.from方法可以将Set结构转为数组</p>
+<pre><code>var items=new Set([1,2,4,5,2,]);
+console.log(Object.prototype.toString.call(items));//[object Set]
+var arr=Array.from(items);
+console.log(Object.prototype.toString.call(items));//[object Array]
+</code></pre><p>Set的遍历操作</p>
+<p>Set的默认遍历器是values方法</p>
+<pre><code>let set=new Set([&quot;red&quot;,&quot;green&quot;,&quot;blue&quot;]);
+for(let x of set){
+    console.log(x);//red green blue
+}
+</code></pre><p>扩展运算符(…)内部使用for…of循环，所以也可用于Set结构</p>
+<pre><code>var arr1=[1,2,3,4,2,1];
+var unique=[...new Set(arr1)];
+console.log(unique);
+</code></pre><p>该方法可以作为一种数组去重的方法</p>
+<p>####Map<br>js的对象本质上时键值对的集合，但是只能用字符串当做键</p>
+<pre><code>var data={};
+var ele=document.getElementById(&quot;MyDiv&quot;);
+data[element]=metadata;
+</code></pre><p>该代码愿意是将一个DOM节点作为对象的键，但是由于对象只接受字符串作为键值，<br>所以element被自动转为字符串</p>
+<p>为了解决这个问题，ES6提供了map数据结构，它类似于对象，也是键值对的集合，<br>但是键的范围不限于字符串，各种类型的值（包括对象）都可以当做键</p>
+<p>Map是ES6新增的有序键值对集合。其基本思想就是把一个值映射给一个唯一的键，<br>这样在任何时刻，都能根据该键获取到对应的值。也就是说，object结构提供了“字符串-值”的对用，Map结构提供了“值-值”的对应。</p>
+<pre><code>var m = new Map();
+var o = {p: &quot;Hello World&quot;};
+m.set(o, &quot;content&quot;)
+m.get(o) // &quot;content&quot;
+m.has(o) // true
+m.delete(o) // true
+m.has(o) // false
+</code></pre><p>上面代码使用set方法，将对象o当作m的一个键，然后又使用get方法读取这个键，接着使用delete方法删除了这个键。</p>
+<p>作为构造函数，Map也可以接受一个数组作为参数。该数组的成员是一个个表示键值对的数组。</p>
+<pre><code>var map = new Map([ [&quot;name&quot;, &quot;张三&quot;], [&quot;title&quot;, &quot;Author&quot;]]);
+
+map.size // 2
+map.has(&quot;name&quot;) // true
+map.get(&quot;name&quot;) // &quot;张三&quot;
+map.has(&quot;title&quot;) // true
+map.get(&quot;title&quot;) // &quot;Author&quot;
+</code></pre><p>Map的键实际上是跟内存地址绑定的，只要内存地址不一样，就视为两个键。这就解决了同名属性碰撞（clash）的问题，我们扩展别人的库的时候，如果使用对象作为键名，就不用担心自己的属性与原作者的属性同名。</p>
+<p>Map数据结构的属性和方法</p>
+<ul>
+<li>size：返回成员总数。</li>
+<li>set(key, value)：设置key所对应的键值，然后返回整个Map结构。如果key已经有值，则键值会被更新，否则就新生成该键。</li>
+<li>get(key)：读取key对应的键值，如果找不到key，返回undefined。</li>
+<li>has(key)：返回一个布尔值，表示某个键是否在Map数据结构中。</li>
+<li>delete(key)：删除某个键，返回true。如果删除失败，返回false。</li>
+<li>clear()：清除所有成员，没有返回值。</li>
+</ul>
+<p>Map数据结构的遍历</p>
+<p>Map原生提供三个遍历器。</p>
+<p>keys()：返回键名的遍历器。<br><br>values()：返回键值的遍历器。<br><br>entries()：返回所有成员的遍历器。<br></p>
+<pre><code>let map = new Map([
+  [&apos;F&apos;, &apos;no&apos;],
+  [&apos;T&apos;,  &apos;yes&apos;],
+]);
+
+for (let key of map.keys()) {
+  console.log(key);
+}
+// &quot;F&quot;
+// &quot;T&quot;
+
+for (let value of map.values()) {
+  console.log(value);
+}
+// &quot;no&quot;
+// &quot;yes&quot;
+
+for (let item of map.entries()) {
+  console.log(item[0], item[1]);
+}
+// &quot;F&quot; &quot;no&quot;
+// &quot;T&quot; &quot;yes&quot;
+
+// 或者
+for (let [key, value] of map.entries()) {
+  console.log(key, value);
+}
+
+// 等同于使用map.entries()
+for (let [key, value] of map) {
+  console.log(key, value);
+}
+</code></pre><p>上面代码最后的那个例子，表示Map结构的默认遍历器就是entires方法</p>
+<p>Map结构转为数组结构，比较快速的方法是结合使用扩展运算符（…）</p>
+<pre><code>let map = new Map([
+  [1, &apos;one&apos;],
+  [2, &apos;two&apos;],
+  [3, &apos;three&apos;],
+]);
+
+[...map.keys()]
+// [1, 2, 3]
+
+[...map.values()]
+// [&apos;one&apos;, &apos;two&apos;, &apos;three&apos;]
+
+[...map.entries()]
+// [[1,&apos;one&apos;], [2, &apos;two&apos;], [3, &apos;three&apos;]]
+
+[...map]
+// [[1,&apos;one&apos;], [2, &apos;two&apos;], [3, &apos;three&apos;]]
+</code></pre><p>参考文献：<a href="http://javascript.ruanyifeng.com/advanced/ecmascript6.html" target="_blank" rel="external">javascript标准参考教程</a><br><a href="https://wohugb.gitbooks.io/ecmascript-6/content/docs/set-map./html" target="_blank" rel="external">ECMAScript6入门</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+          <p class="article-more-link">
+            <a href="/2016/03/09/es6-data/#more">阅读更多</a>
+          </p>
+        
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-protperty" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+  <div class="article-inn">
+  <div class="article-meta">
+    <span class="glyphicon" "glyphicon-calendar" aria-hidden="true"></span>
+    <a href="/2016/03/08/protperty/" class="article-date">
+  <time datetime="2016-03-08T04:54:43.000Z" itemprop="datePublished">2016-03-08</time>
+</a>
+    
+  </div>
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/08/protperty/">前端性能优化</a>
+    </h1>
+  
+
+      </header>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当在地址栏中输入url时，发生的操作</p>
+<p>###1 域名解析<br>比如输入www.baidu.com 。导航的第一步是通过访问的域名找出IP地址。<br>DNS查找的顺序为：</p>
+<p>浏览器缓存：浏览器会缓存DNS记录一段时间<br><br>系统缓存：如果在浏览器中没有找到需要的记录，浏览器会做一个系统调用，<br>以获得系统缓存的记录<br><br>路由器缓存：将查询请求发向路由器<br><br>ISP DNS缓存：从顶级域名递归搜索<br></p>
+<p>###2域名解析为IP地址后 向web服务器建立TCP连接（3次握手）</p>
+<p>###3 浏览器向web服务器发送HTTP请求</p>
+<p>浏览器将请求发送至www.baidu.com所在的服务器</p>
+<p>###4 web服务器响应请求并返回指定的URL数据或错误信息，<br>如果设定重定向，则定位到新的URL地址</p>
+<p>###5 浏览器下载数据后解析HTML源文件，解析的过程实现对页面的排版<br>浏览器会发送请求来获得静态文件，这些地址都要经历一个和HTML读取类似的过程。所以浏览器会在DNS中查找这些域名，发送请求，重定向等等…</p>
+<p>但 不像动态页面那样，静态文件会允许浏览器对其进行缓存。有的文件可能会不需要与服务器通讯，而从缓存中直接读取。服务器的响应中包含了静态文件保存的期限 信息，所以浏览器知道要把它们缓存多长时间。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+          <p class="article-more-link">
+            <a href="/2016/03/08/protperty/#more">阅读更多</a>
+          </p>
+        
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ajax" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+  <div class="article-inn">
+  <div class="article-meta">
+    <span class="glyphicon" "glyphicon-calendar" aria-hidden="true"></span>
+    <a href="/2016/03/07/ajax/" class="article-date">
+  <time datetime="2016-03-07T04:47:58.000Z" itemprop="datePublished">2016-03-07</time>
+</a>
+    
+  </div>
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/07/ajax/">ajax的用法</a>
+    </h1>
+  
+
+      </header>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ajax 的全称是AsynchronousJavaScript and XML，其中，Asynchronous 是异步的意思，<br>它有别于传统web开发中采用的同步的方式。</p>
+<p>##同步和异步<br>异步传输是面向字符的传输，它的单位是字符；而同步传输是面向比特的传输，它的单位是桢，<br>它传输的时候要求接受方和发送方的时钟是保持一致的。</p>
+<p>举个例子来说同步和异步，<br>同步就好像我们买楼一次性支付，而异步就是买楼分期付款。<br>所以当我们把这种生活中的概念化解释转移到理解Ajax异步上来就发现，<br>它是通过这样一种异步的方式来让用户更加收益，也就是说可以让用户的有更好的体验性。其实这也是Ajax的意义所在。</p>
+<p>Ajax的原理简单来说通过XmlHttpRequest对象来向服务器发异步请求，从服务器获得数据，<br>然后用javascript来操作DOM而更新页面。这其中最关键的一步就是从服务器获得请求数据。<br>要清楚这个过程和原理，我们必须对 XMLHttpRequest有所了解。</p>
+<p>XMLHttpRequest是ajax的核心机制，是一种支持异步请求的技术。<br>简单的说，也就是javascript可以及时向服务器提出请求和处理响应，而不阻塞用户。<br>达到无刷新的效果。</p>
+<p>##XMLHttpRequest的常见属性<br>readystatechange时间用来检测每次状态变化后readystate的值。<br><br>readystate属性表示请求/响应过程的当前活动阶段 该属性可取的值如下<br><br>  0：未初始化。尚未调用open()方法<br><br>  1：启动。已经调用open()方法，但尚未接受响应<br><br>  2：发送。已经调用send()方法<br><br>  3：接收。已经接收到部分响应数据<br><br>  4：完成。已经接收到全部响应数据，而且已经可以在客户端使用了<br><br>status:响应的http状态<br>statusText:HTTP状态的说明<br>responseText：作为响应主体被返回的文本</p>
+<p>ajax的常见写法</p>
+<p>创建xhr对象 </p>
+<pre><code>function createXHR(){
+    if(typeof XMLHttpRequest!=&quot;undefined&quot;){
+        return new XMLHttpRequest();
+    }else if(typeof ActiveXObject!=&quot;undefined&quot;){
+        //ie7之前
+        if(typeof arguments.callee.activeXString!=&quot;string&quot;){
+            var versions=[
+                &quot;MSXML2.XMLHttp.6.0&quot;,&quot;MSXML2.XMLHttp.3.0&quot;,&quot;MSXML2.XMLHttp&quot;
+            ],
+            i,len;
+            for ( i = 0,len=versions.length; i &lt; len; i++) {
+                try{
+                    new ActiveXObject(versions[i]);
+                    arguments.callee.activeXString=versions[i];
+                    break;
+                }catch(ex){
+                }
+            }
+        }
+        return new ActiveXObject(arguments.callee.activeXString);
+    }else{
+        throw new Error(&quot;no XHR Object available&quot;);
+    }
+}
+</code></pre><p>利用ajax发送get请求</p>
+<pre><code>var ajaxGet=function(url,callback){
+    var xhr=createXHR();
+    xhr.onreadystatechange=function(){
+        if (xhr.readyState==4) {
+            if (xhr.status&gt;=200&amp;&amp;xhr.status&lt;300||xhr.status==304) {
+                callback(JSON.parse(responseText));
+            }else{
+                alert(&quot;request was unsuccessful:&quot;+xhr.status);
+            }
+        }
+    }
+    xhr.open(&apos;get&apos;,url,true);
+    xhr.send(null);
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+          <p class="article-more-link">
+            <a href="/2016/03/07/ajax/#more">阅读更多</a>
+          </p>
+        
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sort" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+  <div class="article-inn">
+  <div class="article-meta">
+    <span class="glyphicon" "glyphicon-calendar" aria-hidden="true"></span>
+    <a href="/2016/03/07/sort/" class="article-date">
+  <time datetime="2016-03-07T02:44:33.000Z" itemprop="datePublished">2016-03-07</time>
+</a>
+    
+  </div>
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/07/sort/">js实现排序算法</a>
+    </h1>
+  
+
+      </header>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>排序指的是将整数值由大到小或由小到大排列出来</p>
+<p>##冒泡排序<br>冒泡排序的主要思想是将相邻的元素进行比较，当 i值大于i+1时，将两个值交换 当比较完后， 最大的值将会沉入底部<br>，小的值向上慢慢冒泡 知道最小的值冒到最上面为止。实现方法</p>
+<pre><code>function bubble(arr){
+    for(var i=0;i&lt;arr.length;i++){
+        for(var j=0;j&lt;arr.length-1;j++){
+           var temp=0;
+           if(arr[j]&gt;arr[j+1]){
+                var temp=arr[j];
+                arr[j]=arr[j+1];
+                var[j+1]=temp;
+            }
+        }
+    }
+    return arr;
+}
+</code></pre><p>##选择排序<br>选择排序主要思想是将第一个元素和其他的元素相比，如果第1个元素大于其他元素，将两个元素交换，<br>直到最后第一个元素为最小的元素；然后将第二个元素与剩下的其他元素进行比较，以此类推</p>
+<pre><code>function selectSort(arr){
+    for (var i = 0; i &lt; arr.length; i++) {
+        var min=arr[i];
+        for (var j = i; j&lt; arr.length; j++) {
+            if (min&gt;arr[j]) {
+                var temp=min;
+                min=arr[j];
+                arr[j]=temp;
+            }
+        }
+        arr[i]=min;
+    }
+    return arr;
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+          <p class="article-more-link">
+            <a href="/2016/03/07/sort/#more">阅读更多</a>
+          </p>
+        
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+  <div class="article-inn">
+  <div class="article-meta">
+    <span class="glyphicon" "glyphicon-calendar" aria-hidden="true"></span>
+    <a href="/2016/03/06/hexo/" class="article-date">
+  <time datetime="2016-03-06T03:04:00.000Z" itemprop="datePublished">2016-03-06</time>
+</a>
+    
+  </div>
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/06/hexo/">hexo主题修改</a>
+    </h1>
+  
+
+      </header>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>hexo的原理是解析_posts中的md文件，然后根据模板的解析规则进行解析<br><br>hexo的首页在public文件夹下的index.html文件中，如果想在主页中加入元素 可以在这里修改<br><br>hexo的主要样式是在public/css/style.styl中。其中styl文件同除上述预处理器的sass语法相似。如果修改元素的样式，可以相对应的找到该元素，并修改<br><br>hexo中的themes中保存着下载的样式，如果想使用下载的样式，只需修改hexo中的config文件。将config文件中的themes：后面的额值修改为下载的主题的文件夹名称</p>
+<p>如果想对主题进行修改，需要修改主题中的layout布局</p>
+<p>layout文件夹下主要是ejs文件，主要定义html的模板</p>
+<p>layout.ejs  全局布局 引入了_partial/header、_partial/sidebar、_partial/footer等<br><br>index.ejs  首页  引入了_partial/archive文件<br><br>post.ejs 文章模板 引入了_partial/article文件<br><br>page.ejs 分页模板 引入了_partial/article文件<br><br>archive.ejs 归档模板  引入了_partial/article文件<br><br>category.ejs 分类归档 引入了_partial/archive文件<br><br>tag.ejs 标签归档 引入了_partial/archive文件<br></p>
+<p>_partial文件夹下实现的是局部布局<br>archive.ejs 模板定义了对文章的归档后页面的变化<br>article.ejs 模板定义了添加文章后主页html结构的变化</p>
+<h2>帮助函数</h2>
+
+
+<h3>1 基本函数</h3>
+
+<p>（1）URL</p>
+<p>url_for 返回一个带root路径的url，用法： &lt;%- url_for(path) %&gt;<br><br>relative_url 返回from相对的to路径，用法： &lt;%- relative_url(from, to) %&gt;<br><br>gravatar 插入Gravatar图片，用法： &lt;%- gravatar(email, [size])%&gt; ，例如：<br></p>
+<pre><code>&lt;%- gravatar(&apos;a@abc.com&apos;) %&gt;
+// http://www.gravatar.com/avatar/b9b00e66c6b8a70f88c73cb6bdb06787
+&lt;%- gravatar(&apos;a@abc.com&apos;, 40) %&gt;
+// http://www.gravatar.com/avatar/b9b00e66c6b8a70f88c73cb6bdb06787?s=40
+</code></pre><p>（2）HTML</p>
+<p>css 载入CSS文件。用法： &lt;%- css(path, …)%&gt; ， path 可以是数据或者字符串，如果 path 开头不是 / 或任何协议，则会自动加上根路径；如果后面没有加上 .css 扩展名的话，也会自动加上。示例如下：</p>
+<pre><code>&lt;%- css(&apos;style.css&apos;) %&gt;
+// &lt;link rel=&quot;stylesheet&quot; href=&quot;/style.css&quot; type=&quot;text/css&quot;&gt;
+
+
+&lt;%- css([&apos;style.css&apos;, &apos;screen.css&apos;]) %&gt;
+// &lt;link rel=&quot;stylesheet&quot; href=&quot;/style.css&quot; type=&quot;text/css&quot;&gt;
+// &lt;link rel=&quot;stylesheet&quot; href=&quot;/screen.css&quot; type=&quot;text/css&quot;&gt;
+</code></pre><p>（3）js 载入 JavaScript 文件。用法：<br>    &lt;%- js(path, …) %&gt;<br>path 可以是数组或字符串，如果 path 开头不是 / 或任何协议，则会自动加上根路径；如果后面没有加上 .js 扩展名的话，也会自动加上。</p>
+<pre><code>&lt;%- js(&apos;script.js&apos;) %&gt;
+// &lt;script type=&quot;text/javascript&quot; src=&quot;/script.js&quot;&gt;&lt;/script&gt;
+&lt;%- js([&apos;script.js&apos;, &apos;gallery.js&apos;]) %&gt;
+// &lt;script type=&quot;text/javascript&quot; src=&quot;/script.js&quot;&gt;&lt;/script&gt;
+// &lt;script type=&quot;text/javascript&quot; src=&quot;/gallery.js&quot;&gt;&lt;/script&gt;
+</code></pre><p>（4）link_to 插入链接。用法：<br>    &lt;%- link_to(path, [text], [options]) %&gt;<br>options 参数有：</p>
+<p>external 在新窗口中打开链接，默认值为false<br><br>class Class名称，也就是html标签a的class名<br><br>id ID名，也就是html标签a的id名<br><br>示例如下：</p>
+<pre><code>&lt;%- link_to(&apos;http://www.google.com&apos;) %&gt;
+// &lt;a href=&quot;http://www.google.com&quot; title=&quot;http://www.google.com&quot;&gt;http://www.google.com&lt;/a&gt;
+
+
+&lt;%- link_to(&apos;http://www.google.com&apos;, &apos;Google&apos;) %&gt;
+// &lt;a href=&quot;http://www.google.com&quot; title=&quot;Google&quot;&gt;Google&lt;/a&gt;
+
+
+&lt;%- link_to(&apos;http://www.google.com&apos;, &apos;Google&apos;, {external: true, class: &quot;link&quot;}) %&gt;
+// &lt;a href=&quot;http://www.google.com&quot; title=&quot;Google&quot; target=&quot;_blank&quot; rel=&quot;external&quot; class=&quot;link&quot;&gt;Google&lt;/a&gt;
+</code></pre><p>(5) mail_to 插入电子邮件链接。用法：<br>    &lt;%- mail_to(path, [text], [options])%&gt;<br>options 参数有：</p>
+<p>class Class名称，也就是html标签a的class名<br><br>id ID名，也就是html标签a的id名<br><br>subject 邮件主题<br><br>cc 抄送（CC）<br><br>bcc 密送（BCC）<br><br>body 邮件内容<br><br>示例如下：</p>
+<pre><code>&lt;%- mail_to(&apos;a@abc.com&apos;) %&gt;
+// &lt;a href=&quot;mailto:a@abc.com&quot; title=&quot;a@abc.com&quot;&gt;a@abc.com&lt;/a&gt;
+
+
+&lt;%- mail_to(&apos;a@abc.com&apos;, &apos;Email&apos;) %&gt;
+// &lt;a href=&quot;mailto:a@abc.com&quot; title=&quot;Email&quot;&gt;Email&lt;/a&gt;    
+</code></pre><p>(6) image_tag 插入图片。用法：<br>    &lt;%- image_tag(path, [options]) %&gt;<br>options 参数有：</p>
+<p>class Class名称，也就是html标签a的class名<br><br>id ID名，也就是html标签a的id名<br><br>alt 替代文字<br><br>width 宽度<br><br>height 高度<br><br>基本上就是 img 标签里的属性值。</p>
+<p>favicon_tag 插入favicon。用法： &lt;%- favicon_tag(path) %&gt;</p>
+<p>feed_tag 插入feed链接。用法： &lt;%- feed_tag(path, [options]) %&gt; ，参数有： title 和 type (默认值为atom)</p>
+<h3>2 条件函数</h3>
+
+<p>is_current 判断 path 是否符合目前页面的网址。 &lt;%- is_current(path, [strict]) %&gt;<br><br>is_home 判断目前是否为首页。<br><br>is_post 检查目前是否为文章。 &lt;%- is_post() %&gt;<br><br>is_archive 检查目前是否为存档页面。 &lt;%- is_archive() %&gt;<br><br>is_year 检查目前是否为年度归档页面。 &lt;%- is_year() %&gt;<br><br>is_month 检查目前是否为月度归档页面。 &lt;%- is_month() %&gt;<br><br>is_category 检查目前是否为分类归档页面。 &lt;%- is_category() %&gt;<br><br>is_tag 检查目前是否为标签归档页面。 &lt;%- is_tag() %&gt;<br></p>
+<h3>3 字符串处理</h3>
+
+<p>trim 清除字符串开头和结尾的空格。 &lt;%- trim(string) %&gt;<br><br>strip_html 清除字符串中的 HTML 标签。 &lt;%- strip_html(string) %&gt; ，示例：</p>
+<pre><code>&lt;%- strip_html(&apos;It&apos;s not &lt;b&gt;important&lt;/b&gt; anymore!&apos;) %&gt;
+// It&apos;s not important anymore!
+</code></pre><p>titlecase 把字符串转换为正确的 Title case。 &lt;%- titlecase(string) %&gt; 示例：</p>
+<pre><code>&lt;%- titlecase(&apos;this is an apple&apos;) %&gt;
+# This is an Apple
+</code></pre><p>markdown 使用 Markdown 解析字符串。 &lt;%- markdown(str) %&gt; 示例：</p>
+<pre><code>&lt;%- markdown(&apos;make me **strong**&apos;) %&gt;
+// make me &lt;strong&gt;strong&lt;/strong&gt;
+</code></pre><p>render 解析字符串。 &lt;%- render(str, engine, [options]) %&gt;</p>
+<p>word_wrap 使每行的字符串长度不超过 length 。 length 预设为 80。 &lt;%- word_wrap(str, [length]) %&gt; ，示例：</p>
+<pre><code>&lt;%- word_wrap(&apos;Once upon a time&apos;, 8) %&gt;
+// Once upon\n a time
+</code></pre><p>truncate 移除超过 length 长度的字符串。 &lt;%- truncate(text, length) %&gt; 示例：</p>
+<pre><code>&lt;%- truncate(&apos;Once upon a time in a world far far away&apos;, 16) %&gt;
+// Once upon a time
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+          <p class="article-more-link">
+            <a href="/2016/03/06/hexo/#more">阅读更多</a>
+          </p>
+        
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo主题/">hexo主题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-My-New-Post" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+  <div class="article-inn">
+  <div class="article-meta">
+    <span class="glyphicon" "glyphicon-calendar" aria-hidden="true"></span>
+    <a href="/2016/02/24/My-New-Post/" class="article-date">
+  <time datetime="2016-02-24T08:04:21.000Z" itemprop="datePublished">2016-02-24</time>
+</a>
+    
+  </div>
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/24/My-New-Post/">makedown入门</a>
+    </h1>
+  
+
+      </header>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#这里是一级标题</p>
+<p>##这里是二级标题</p>
+<p>###这里是三级标题</p>
+<p>####这里是四级标题</p>
+<p>#####这里是五级标题</p>
+<p>######这里是六级标题</p>
+<p>段落前没有缩进<br>　　如果要实现缩进，在中文输入法中改成“全角”输入 然后再按两个空格<br>行尾一个回车换行显示效果依然是一行。<br>想要分成两行，需要在行尾输入两个空格<br>想要开始一个新的段落，按下两个回车  </p>
+<p>#欢迎</p>
 <p>##欢迎<br>这是我的实验 第一次搭建好博客环境 在这里试一下</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/24/My-New-Post/" data-id="cil1vzuza00002smh2q4na2ub" class="article-share-link">Share</a>
+      
+          <p class="article-more-link">
+            <a href="/2016/02/24/My-New-Post/#more">阅读更多</a>
+          </p>
+        
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客，文章/">博客，文章</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/makedown，初级/">makedown，初级</a></li></ul>
 
     </footer>
   </div>
@@ -106,13 +689,16 @@
 
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+  <div class="article-inn">
   <div class="article-meta">
+    <span class="glyphicon" "glyphicon-calendar" aria-hidden="true"></span>
     <a href="/2016/02/24/hello-world/" class="article-date">
   <time datetime="2016-02-24T07:51:11.357Z" itemprop="datePublished">2016-02-24</time>
 </a>
     
   </div>
-  <div class="article-inner">
     
     
       <header class="article-header">
@@ -124,6 +710,7 @@
   
 
       </header>
+      </div>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -140,7 +727,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/24/hello-world/" data-id="cil1vzv1q00032smhuy24uxm9" class="article-share-link">Share</a>
+      
+          <p class="article-more-link">
+            <a href="/2016/02/24/hello-world/#more">阅读更多</a>
+          </p>
+        
       
       
     </footer>
@@ -150,52 +741,68 @@
 
 
   
-  
+
+
 </section>
         
           <aside id="sidebar">
   
     
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客，文章/">博客，文章</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript6/">ECMAScript6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo主题/">hexo主题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/makedown，初级/">makedown，初级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能优化/">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/博客，文章/" style="font-size: 10px;">博客，文章</a>
+      <a href="/tags/ECMAScript6/" style="font-size: 10px;">ECMAScript6</a> <a href="/tags/hexo主题/" style="font-size: 10px;">hexo主题</a> <a href="/tags/makedown，初级/" style="font-size: 10px;">makedown，初级</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li></ul>
     </div>
   </div>
+
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
+    <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2016/02/24/My-New-Post/">第一篇文章</a>
+            <a href="/2016/03/09/es6-data/">ECMAScript6的新特性--数据类型</a>
           </li>
         
           <li>
-            <a href="/2016/02/24/hello-world/">Hello World</a>
+            <a href="/2016/03/08/protperty/">前端性能优化</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/07/ajax/">ajax的用法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/07/sort/">js实现排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/06/hexo/">hexo主题修改</a>
           </li>
         
       </ul>

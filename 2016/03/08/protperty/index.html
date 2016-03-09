@@ -3,18 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>归档 
+  <title>前端性能优化 
    </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="charlene0824's blog">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="当在地址栏中输入url时，发生的操作
+###1 域名解析比如输入www.baidu.com 。导航的第一步是通过访问的域名找出IP地址。DNS查找的顺序为：
+浏览器缓存：浏览器会缓存DNS记录一段时间系统缓存：如果在浏览器中没有找到需要的记录，浏览器会做一个系统调用，以获得系统缓存的记录路由器缓存：将查询请求发向路由器ISP DNS缓存：从顶级域名递归搜索
+###2域名解析为IP地址后 向web服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端性能优化">
+<meta property="og:url" content="http://yoursite.com/2016/03/08/protperty/index.html">
 <meta property="og:site_name" content="charlene0824's blog">
-<meta property="og:description">
+<meta property="og:description" content="当在地址栏中输入url时，发生的操作
+###1 域名解析比如输入www.baidu.com 。导航的第一步是通过访问的域名找出IP地址。DNS查找的顺序为：
+浏览器缓存：浏览器会缓存DNS记录一段时间系统缓存：如果在浏览器中没有找到需要的记录，浏览器会做一个系统调用，以获得系统缓存的记录路由器缓存：将查询请求发向路由器ISP DNS缓存：从顶级域名递归搜索
+###2域名解析为IP地址后 向web服">
+<meta property="og:updated_time" content="2016-03-08T06:07:00.238Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="charlene0824's blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="前端性能优化">
+<meta name="twitter:description" content="当在地址栏中输入url时，发生的操作
+###1 域名解析比如输入www.baidu.com 。导航的第一步是通过访问的域名找出IP地址。DNS查找的顺序为：
+浏览器缓存：浏览器会缓存DNS记录一段时间系统缓存：如果在浏览器中没有找到需要的记录，浏览器会做一个系统调用，以获得系统缓存的记录路由器缓存：将查询请求发向路由器ISP DNS缓存：从顶级域名递归搜索
+###2域名解析为IP地址后 向web服">
   
     <link rel="alternate" href="/atom.xml" title="charlene0824&#39;s blog" type="application/atom+xml">
   
@@ -67,154 +77,79 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
+        <section id="main"><article id="post-protperty" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/09/es6-data/" class="archive-article-date">
-  <time datetime="2016-03-09T01:45:43.000Z" itemprop="datePublished">3月 9</time>
+  <div class="article-inner">
+  <div class="article-inn">
+  <div class="article-meta">
+    <span class="glyphicon" "glyphicon-calendar" aria-hidden="true"></span>
+    <a href="/2016/03/08/protperty/" class="article-date">
+  <time datetime="2016-03-08T04:54:43.000Z" itemprop="datePublished">2016-03-08</time>
 </a>
-      
+    
+  </div>
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/09/es6-data/">ECMAScript6的新特性--数据类型</a>
+    <h1 class="article-title" itemprop="name">
+      前端性能优化
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
+      </div>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/08/protperty/" class="archive-article-date">
-  <time datetime="2016-03-08T04:54:43.000Z" itemprop="datePublished">3月 8</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/08/protperty/">前端性能优化</a>
-    </h1>
-  
+        <p>当在地址栏中输入url时，发生的操作</p>
+<p>###1 域名解析<br>比如输入www.baidu.com 。导航的第一步是通过访问的域名找出IP地址。<br>DNS查找的顺序为：</p>
+<p>浏览器缓存：浏览器会缓存DNS记录一段时间<br><br>系统缓存：如果在浏览器中没有找到需要的记录，浏览器会做一个系统调用，<br>以获得系统缓存的记录<br><br>路由器缓存：将查询请求发向路由器<br><br>ISP DNS缓存：从顶级域名递归搜索<br></p>
+<p>###2域名解析为IP地址后 向web服务器建立TCP连接（3次握手）</p>
+<p>###3 浏览器向web服务器发送HTTP请求</p>
+<p>浏览器将请求发送至www.baidu.com所在的服务器</p>
+<p>###4 web服务器响应请求并返回指定的URL数据或错误信息，<br>如果设定重定向，则定位到新的URL地址</p>
+<p>###5 浏览器下载数据后解析HTML源文件，解析的过程实现对页面的排版<br>浏览器会发送请求来获得静态文件，这些地址都要经历一个和HTML读取类似的过程。所以浏览器会在DNS中查找这些域名，发送请求，重定向等等…</p>
+<p>但 不像动态页面那样，静态文件会允许浏览器对其进行缓存。有的文件可能会不需要与服务器通讯，而从缓存中直接读取。服务器的响应中包含了静态文件保存的期限 信息，所以浏览器知道要把它们缓存多长时间。</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/07/ajax/" class="archive-article-date">
-  <time datetime="2016-03-07T04:47:58.000Z" itemprop="datePublished">3月 7</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/07/ajax/">ajax的用法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/07/sort/" class="archive-article-date">
-  <time datetime="2016-03-07T02:44:33.000Z" itemprop="datePublished">3月 7</time>
-</a>
+    </div>
+    <footer class="article-footer">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/07/sort/">js实现排序算法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/06/hexo/" class="archive-article-date">
-  <time datetime="2016-03-06T03:04:00.000Z" itemprop="datePublished">3月 6</time>
-</a>
+          <p class="article-more-link">
+            <a href="/2016/03/08/protperty/#more">阅读更多</a>
+          </p>
+        
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/06/hexo/">hexo主题修改</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/24/My-New-Post/" class="archive-article-date">
-  <time datetime="2016-02-24T08:04:21.000Z" itemprop="datePublished">2月 24</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/24/My-New-Post/">makedown入门</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/02/24/hello-world/" class="archive-article-date">
-  <time datetime="2016-02-24T07:51:11.357Z" itemprop="datePublished">2月 24</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/24/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2016/03/09/es6-data/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ECMAScript6的新特性--数据类型
+        
+      </div>
+    </a>
   
+  
+    <a href="/2016/03/07/ajax/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ajax的用法</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-  
-    </div></section>
-  
-
 
 </section>
         
