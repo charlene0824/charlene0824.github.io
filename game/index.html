@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>大鱼喂小鱼</title>
+	<style type="text/css">
+	body{
+		padding:10px;
+	}
+	.container{
+		width:800px;
+		height:600px;
+		margin:0 auto;
+	}
+	#wrap{
+		position: relative;
+		width:800px;
+		height:600px;
+		margin:0px;
+	}
+	#canvas1{
+		position:absolute;
+		left:0;
+		bottom:0;
+		z-index:1;
+	}
+	#canvas2{
+		position:absolute;
+		left:0;
+		bottom:0;
+		z-index:0;
+	}
+	</style>
+</head>
+<body>
+
+	<div class="container">
+	<div id="wrap"></div>
+		<canvas id="canvas1" width="800" height="600" ></canvas>
+		<canvas id="canvas2" width="800" height="600"></canvas>
+	</div>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/commonFunction.js"></script>
+	<script type="text/javascript" src="js/background.js"></script>
+	<script type="text/javascript" src="js/ane.js"></script>
+	<script type="text/javascript" src="js/fruit.js"></script>
+	<script type="text/javascript" src="js/mom.js"></script>
+
+	<script type="text/javascript" src="js/collision.js"></script>
+	<script type="text/javascript" src="js/baby.js"></script>
+	<script type="text/javascript" src="js/data.js"></script>
+	<script type="text/javascript" src="js/wave.js"></script>
+	<script type="text/javascript" src="js/halo.js"></script>
+	<script type="text/javascript" src="js/dust.js"></script>
+
+</body>
+</html>
