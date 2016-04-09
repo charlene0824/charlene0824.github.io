@@ -204,7 +204,7 @@ aside .lunar,aside .cycle,aside .ani-year{
         display: block;  
         /*font-family: "黑体";*/
         font-size: 20px; 
-        /*font-weight: 600;  */
+        font-weight: normal; 
         text-align: center;
         padding:5px;
          
