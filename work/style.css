@@ -198,6 +198,10 @@ aside .lunar,aside .cycle,aside .ani-year{
     .container{
         width:500px;
     }
+    .cal caption .year-month{
+        margin-left:20px;
+        float: left;
+    }   
     .cal tbody td{
         width:60px;
         height:60px;
