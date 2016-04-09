@@ -190,7 +190,7 @@ aside .lunar,aside .cycle,aside .ani-year{
 
 @media (max-width: 640px) {
     table.cal{
-        border: 0;
+        margin:auto;
     }
     aside{
         display:none;
