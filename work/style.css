@@ -196,12 +196,12 @@ aside .lunar,aside .cycle,aside .ani-year{
         display:none;
     }
     .container{
-        width:500px;
+        width:450px;
     }
     .cal tbody td{
         width:60px;
         height:60px;
-        border: 0;
+        border: 1px solid #fff;
     }
     .cal tbody td span{  
         display: block;  
@@ -209,7 +209,7 @@ aside .lunar,aside .cycle,aside .ani-year{
         font-size: 20px; 
         font-weight: normal; 
         text-align: center;
-        padding:5px;
+        padding:2px;
          
     }  
     .cal tbody td div{
