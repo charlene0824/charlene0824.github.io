@@ -25,7 +25,6 @@ select{
     background-color: white;
     background-repeat: no-repeat;
     /*背景图像的尺寸：第一个值为宽度，第二值为高度*/
-     
     background-size: 4px 8px, 4px 8px, 20px 30px, 1px 30px;
     /*背景图片：多张图片用","分割*/
     /*repeating-linear-gradient() 函数用于重复线性渐变：参数分别为角度，颜色1，颜色2,...*/
@@ -190,6 +189,9 @@ aside .lunar,aside .cycle,aside .ani-year{
 }
 
 @media (max-width: 640px) {
+    table.cal{
+        border: 0;
+    }
     aside{
         display:none;
     }
