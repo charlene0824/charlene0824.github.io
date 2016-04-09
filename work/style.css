@@ -196,11 +196,12 @@ aside .lunar,aside .cycle,aside .ani-year{
         display:none;
     }
     .container{
-        width:640px;
+        width:500px;
     }
     .cal tbody td{
         width:60px;
         height:60px;
+        border: 0;
     }
     .cal tbody td span{  
         display: block;  
