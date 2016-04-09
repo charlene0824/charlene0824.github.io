@@ -127,7 +127,7 @@ table.cal{
  
 .cal tbody td{  
     border:1px solid #eee;
-    width:80px;
+    width:100px;
     height:70px; 
     cursor: pointer;
 }  
@@ -137,12 +137,12 @@ table.cal{
     font-size: 30px; 
     font-weight: 600;  
     text-align: center;
-    /*padding:0.385em 0.692em 0.308em 0.692em;*/
+    padding:0.385em 0.692em 0.308em 0.692em;
      
 }  
 .cal tbody td div{
     font-size:15px;
-     /*padding:0.385em 0.692em 0.308em 0.692em;*/
+     padding:0.385em 0.692em 0.308em 0.692em;
 }
 
 .cal tbody a:hover,.cal tbody a:focus ,.cal tbody a:active,.cal tbody .selected a:visited,  
@@ -196,4 +196,23 @@ aside .lunar,aside .cycle,aside .ani-year{
     .container{
         width:640px;
     }
+    .cal tbody td{
+        width:60px;
+        height:60px;
+    }
+    .cal tbody td span{  
+        display: block;  
+        /*font-family: "黑体";*/
+        font-size: 20px; 
+        /*font-weight: 600;  */
+        text-align: center;
+        padding:5px;
+         
+    }  
+    .cal tbody td div{
+        font-size:10px;
+        padding:5px;
+    }
+
+
 }
