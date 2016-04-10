@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<meta content="width=device-width, initial-scale=0.8, user-scalable=yes" name="viewport" />
+    <title>万年历</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">  
+<!-- summmary属性可以应用于表格标签，用来描述表格的内容 -->  
+    <table cellspacing="0" class="cal" summary="a calendar style date picker">  
+        <caption>
+            <!-- 年的select选择框 -->
+            <div class="year-month">
+            <div class="year">
+            <span class="control" rel="prev" id="year-left"></span>
+            <select class="year" id="year"> 
+            </select>
+            <span  class="control" rel="next" id="year-right"></span>
+            </div>
+            <!-- 月的select选择框 -->
+            <div class="month">
+            <span class="control" rel="prev" id="month-left"></span>
+            <select class="month" id="month">  
+            </select>
+            <span class="control" rel="next" id="month-right"></span>
+            </div>
+            </div>
+            <div class="time">
+            <span>北京时间 </span>
+            <span id="now"></span> 
+            </div>    
+             
+        </caption>  
+        <!-- 利用thead、tbody和tfoot可以将表格划分为几个逻辑部分 在一个表格中只能使用一个thead和tfoot元素 tbody可以使用多个 -->  
+        <thead>  
+            <tr>  
+            <!-- scope可以设置值为row或col，定义他们是行标题还是列标题 -->  
+                <th scope="col">sun</th>  
+                <th scope="col">mon</th>  
+                <th scope="col">tue</th>  
+                <th scope="col">wed</th>  
+                <th scope="col">tur</th>  
+                <th scope="col">fri</th>  
+                <th scope="col">sat</th>  
+            </tr>  
+        </thead>  
+        <tbody id="cal">  
+            <tr>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+            </tr>  
+            <tr>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+            </tr>  
+            <tr>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+            </tr>   
+            <tr>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+            </tr>  
+            <tr>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+            </tr> 
+            <tr>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+                <td><span class="solar"></span><div class="lunar"></div></td>  
+            </tr> 
+        </tbody>     
+    </table>  
+ 
+<aside class="show-detail">
+    <div class="sunlar" id="sunlar">2016</div>
+    <div class="sunlar-day" id="sunlar-day">3</div>
+    <div class="lunar" id="lunar"></div>
+    <div class="cycle" id="cycle"></div>
+    <div class="ani-year" id="ani-year"></div>
+    <div class="festival" id="festival"></div>
+
+</aside>
+</div> 
+<script src="scripts/require.js" data-main="scripts/script"></script>
+
+</body>
+</html>
