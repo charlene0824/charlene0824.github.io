@@ -1,0 +1,27 @@
+*{
+	margin:0;
+	padding:0;
+}
+/*瀑布流的实现原理是通过绝对定位的方式让图片显示咋特定地方*/
+#main{
+	position:relative;
+	width:1215px;
+	margin:0 auto;
+}
+.box{
+	/*为了在以后的js中使用offsetHeight计算列高方便
+	在此使用padding值间隔图片与图片之间的距离*/
+	padding:15px 0 0 15px;
+	float:left;
+	/*border:1px solid red;*/
+}
+.pic{
+	padding:10px;
+	border:1px solid #ccc;
+	border-radius: 5px;
+	box-shadow:0 0 5px #ccc;
+}
+.pic img{
+	width:165px;
+	height:auto;
+}

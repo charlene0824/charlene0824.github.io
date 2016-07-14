@@ -1,0 +1,87 @@
+.cont{
+	margin:0 auto;
+	width:80%;
+	text-align:center;
+
+}
+.h1-title{
+	font-size:24px;
+	text-align:center;
+	padding:20px 0;
+}
+.banner{
+	text-align:center;
+	padding:0;
+	width: 600px; 
+	height:400px;
+	margin:0 auto;
+	line-height: 0;
+	border:1px solid black;
+	position:relative;
+	display:inline-block;
+}
+.banner ul{
+	margin:0;
+	padding:0;
+	/*width:4200px;*/
+	position:absolute;
+	z-index:1;
+	/*left:-600px;*/
+	}
+.banner ul:after {
+  content: "ddd";
+  clear: both;
+  display: block;
+  visibility: hidden;
+  height: 0; }
+
+.banner ul li{
+		float:left;
+		list-style-type: none;
+		/*width:600px;*/
+		
+	}
+.banner nav{
+		display: inline-block;
+		/*background-color: #000;*/
+		text-align: center;
+		height:10px;
+		z-index: 2;
+		position: absolute;
+		bottom:20px;
+		/*left:250px;*/
+		 
+
+	}
+.banner nav .on {  background: orange;}
+.banner nav span{
+		cursor:pointer;
+		float:left;
+		border:1px solid #fff;
+		margin-left:5px;
+		width:10px;
+		height:10px;
+		border-radius: 50%;
+		background-color: #333;		
+}
+.banner .arrow{
+		cursor:pointer;
+		display:none;
+		line-height: 39px;
+		text-align: center; 
+		font-size:36px;
+		font-weight:bold;
+		width:25px;
+		text-decoration: none;
+		position:absolute;
+		z-index:2;
+		top:50%;
+		transform: translate(0,-50%);
+		background-color:RGBA(0,0,0,.3); 
+		color: #fff;
+
+	}
+.banner .arrow:hover { background-color: RGBA(0,0,0,.7);}
+.banner:hover .arrow { display: block;}
+.banner .prev { left: 20px;}
+.banner .next { right: 20px;}
