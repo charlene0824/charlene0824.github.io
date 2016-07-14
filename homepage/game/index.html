@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>大鱼喂小鱼</title>
+	<style type="text/css">
+	body{
+		padding:10px;
+	}
+	.game-cont{
+		width:800px;
+		height:600px;
+		margin:0 auto;
+	}
+	#wrap{
+		position: relative;
+		width:800px;
+		height:600px;
+		margin:0px;
+	}
+	#canvas1{
+		position:absolute;
+		left:0;
+		bottom:0;
+		z-index:1;
+	}
+	#canvas2{
+		position:absolute;
+		left:0;
+		bottom:0;
+		z-index:0;
+	}
+	</style>
+</head>
+<body>
+
+	<div class="game-cont">
+	<div id="wrap"></div>
+		<canvas id="canvas1" width="800" height="600" ></canvas>
+		<canvas id="canvas2" width="800" height="600"></canvas>
+	</div>
+	<script type="text/javascript" src="script/game-main.js"></script>
+	<script type="text/javascript" src="script/game-commonFunction.js"></script>
+	<script type="text/javascript" src="script/game-background.js"></script>
+	<script type="text/javascript" src="script/game-ane.js"></script>
+	<script type="text/javascript" src="script/game-fruit.js"></script>
+	<script type="text/javascript" src="script/game-mom.js"></script>
+
+	<script type="text/javascript" src="script/game-collision.js"></script>
+	<script type="text/javascript" src="script/game-baby.js"></script>
+	<script type="text/javascript" src="script/game-data.js"></script>
+	<script type="text/javascript" src="script/game-wave.js"></script>
+	<script type="text/javascript" src="script/game-halo.js"></script>
+	<script type="text/javascript" src="script/game-dust.js"></script>
+
+</body>
+</html>
