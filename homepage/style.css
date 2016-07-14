@@ -1,0 +1,67 @@
+*{
+	padding:0px;
+	margin:0px;
+}
+.header-title{
+	background-color:#eee;
+	box-sizing:border-box;
+	padding:50px 10px;
+	margin-bottom:10px;
+}
+.header-cont{
+	margin:0 auto;
+	width:90%;
+}
+.display-wrap{
+	display:inline-block;
+	width:24%;
+	
+}
+.display{
+	width:100%;
+	display:inline-block;
+	height:200px;
+	text-align:center;
+}
+.ahref{
+	text-align:center;
+	padding:10px 0;
+}
+.ahref a{
+	text-decoration:none;
+	color:black;
+	font-size:20px;
+
+}
+.ahref a:hover{
+	color:#0E7214;
+}
+.display-one{
+	background-image:url('images/uidisplay.png');
+	background-repeat: no-repeat;
+	background-position:center;
+}
+.display-two{
+	background-image:url('images/ife.png');
+	background-repeat: no-repeat;
+	background-position:center;
+}
+.display-three{
+	background-image:url('images/game.png');
+	background-repeat: no-repeat;
+	background-position:center;
+}
+.display-four{
+	background-image:url('images/demo.png');
+	background-repeat: no-repeat;
+	background-position:center;
+}
+
+.clearfix:after{
+	content:'c';
+	clear:both;
+	display:block;
+	visibility:hidden;
+	height:0;
+
+}

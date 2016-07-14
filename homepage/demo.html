@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo </title>
+</head>
+<body>
+<li style='display:inline-block;'><img id='img' src="images/1.jpg"></li>
+<div style="border:1px solid red;width:300px;margin-left: auto; margin-right: auto;overflow:auto;padding:10px;resize:both">
+	<div style='display:table-cell;border:1px solid red;width:2000px'>
+	<p>网格布局与伸缩布局的区别 有什么不同 你知道吗  我不知道 你也不知道</p>
+	</div>
+</div>
+
+	<script type="text/javascript">
+
+document.getElementById('img').onload = function(){
+	console.log(document.getElementById('img').offsetWidth);
+}
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>个人DEMO</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ng-app='myapp'>
+<div class='header-title'>
+<div class='header-cont'>
+<div class='display-wrap'>
+	<div class='display display-one'></div>
+	<div class='ahref'><a href="#/ui">ui展示</a></div>
+</div>
+<div class='display-wrap'>
+	<div class='display display-two'></div>
+	<div class='ahref'><a href="#/ife">百度前端技术学院</a></div>
+</div>
+<div class='display-wrap'>
+	<div class='display display-three'></div>
+	<div class='ahref'><a href="#/game">万年历</a></div>
+</div>
+<div class='display-wrap'>
+	<div class='display display-four'></div>
+	<div class='ahref'><a href="#/demo">小demo</a></div>
+</div>
+</div>
+</div>	
+	<div class="{{classname}} clearfix" ng-view></div> 
+
+	<script type="text/javascript" src='jquery.js'></script>
+	<script type="text/javascript" src='angular.js'></script>
+<script type="text/javascript" src='angular-route.js'></script>
+<script type="text/javascript" src='app.js'></script>
+</body>
+</html>
