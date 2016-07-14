@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下拉菜单</title>
+	<link rel="stylesheet" type="text/css" href="nav1.css"> 
+	<!-- <script type="text/javascript" src="jquery-1.11.3.js"></script> -->
+	<script type="text/javascript" >
+	// jQuery实现菜单的逐渐增减
+		/*$(document).ready(function() {
+			$('ul>活动费火炬大厦').mousemove(function(event) {
+				
+				$(this).find('ul').slideDown('2000');
+			});
+			$('ul>li').mouseleave(function(event) {
+				
+				$(this).find('ul').slideUp('2000');
+			});
+		});*/
+// js实现菜单的逐渐增减
+document
+		window.onload=function(){
+			var lis=document.getElementsByTagName("li");
+			for(var i=0;i<lis.length;i++){
+				lis[i].onmouseover=function(){
+				var uu=this.getElementsByTagName("ul")[0];
+				if(uu!=undefined)
+				uu.style.display="block";
+				change1(uu.id,1); 
+				}
+				lis[i].onmouseleave=function(){
+				var uu=this.getElementsByTagName("ul")[0];
+				if(uu!=undefined){
+					uu.style.display="none";
+				    change1(uu.id,-1);
+				 }
+				
+				}
+			}
+			
+				function change1(id,count){
+					var ull=document.getElementById(id);
+					var h=0;
+					//alert(h);
+					h+=count;
+					if(count>0){
+						if(h<=ull.offsetHeight){
+							ull.style.height=h+"px";
+							setTimeout("change1('"+id+"',1)",10);
+							//setTimeout("alert('对不起')",10);
+
+						}
+						else{return;}
+					}
+					else{
+						if(h>0){
+							ull.style.display="none";
+							return;
+						}
+					}
+
+				}
+			
+}
+		
+
+	</script>
+</head>
+<body>
+	<div id="nav">
+		<ul id="uuu">
+			<li><a href="#">首页</a></li>
+			<li ><a href="#">课程大厅</a>
+			<ul id="uu1">
+				<li><a href="#">JavaScript</a></li>
+				<li><a href="#">CSS</a></li>
+				<li><a href="#">HTML</a></li>
+			</ul>
+
+			</li>
+			<li><a href="#">学习中心</a></li>
+			<li><a href="#">经典案例</a></li>
+			<li><a href="#">关于我们</a></li>
+		</ul>
+	</div>
+</body>
+</html>

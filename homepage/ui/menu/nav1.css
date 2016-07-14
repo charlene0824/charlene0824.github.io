@@ -1,0 +1,67 @@
+ *{
+ 	padding: 0px;
+ 	margin:0px;
+ }
+ #nav{
+	background-color: #EEE;
+	width: 600px;
+	height:40px;
+	/*border: 1px solid red;*/
+	margin:0 auto;
+}
+ul li{
+	position: relative;
+	list-style-type: none;
+	float:left;
+	/*width: 100px;*/
+	/*padding-top: 10px;*/
+	line-height: 40px;/*垂直居中*/
+	text-align: center;/*水平居中*/
+	/*padding:0px 10px;自适应li中的文本长短*/
+
+}
+ul li ul{
+	position: absolute;
+	left:0px;
+	top: 40px;
+	display: none;
+	height:0px;
+}
+ul li ul li{
+	float:none;
+	background-color: #eee;
+	margin-top: 2px;
+}
+ a{
+	text-decoration: none;
+	color:#010101;
+	display:block;
+	padding:0px 10px;
+}
+a:hover{
+	color: #FFFDFD;
+	background-color: #898686;
+}
+/*ul li:hover ul{display: block;}*/
+
+ /* ul li:hover ul{
+ 	display:block;
+ }  
+ ul li:hover ul li ul{
+ 	display:none;
+ }  */
+ul li ul li ul{
+	width: 100px;
+	text-align: center; 
+	/*display: none;*/
+	position:absolute;
+	left:105px;
+	/*top:200px;*/
+};
+ /* ul li ul li:hover{
+ 	color:white;
+ }
+ ul li ul li:hover ul{
+ 	display:block;
+ 
+ }  */
