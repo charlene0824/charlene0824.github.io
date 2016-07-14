@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>task15:JavaScript实现树的遍历</title>
+		<style type="text/css">
+
+		nav{
+			width:300px;
+			margin:0 auto;	
+		}
+		div{
+			
+			display: inline-block;
+			
+		}
+		.search{
+			display: block;
+			margin: 0 auto;
+			padding:10px;
+			width:300px;
+		}
+		
+		.a1{
+			display: flex;
+			justify-content:space-around;
+			align-items: center;
+			width:1050px;
+			height:300px;
+			border:1px solid #7BF0EC;
+		}
+		.b10,.b11{
+			display: flex;
+			justify-content:space-around;
+			align-items: center;
+			width:450px;
+			height:250px;
+			border:1px solid #9FBDFC;
+		}
+		.b12{
+			display: flex;
+			justify-content:space-around;
+			align-items: center;
+			width:100px;
+			height:250px;
+			border:1px solid #97DC6C;
+		}
+		.c100{
+			display: flex;
+			justify-content:space-around;
+			align-items: center;
+			width:350px;
+			height:200px;
+			border:1px solid #C848BF;
+		}
+		.c110,.c111{
+			display: flex;
+			justify-content:space-around;
+			align-items: center;
+			width:180px;
+			height:200px;
+			border:1px solid #C848BF;
+		}
+		.d1000,.d1001,.d1002,.d1003,.d1100,.d1101,.d1102,.d1110{
+			display: flex;
+			justify-content:space-around;
+			align-items: center;
+			width:40px;
+			height:150px;
+			border:1px solid #FDBF6F;
+		}
+		.d1110{
+			width:100px;
+		}
+		.e11110{
+			display: flex;
+			justify-content:space-around;
+			align-items: center;
+			width:50px;
+			height:100px;
+			border:1px solid #11B3A1;
+		}
+		</style>
+	</head>
+	<body>
+	<div>
+	<nav>
+		<input type="button" class="deep" value="深度优先"></input>
+		<input type="button" class="spread" value="广度优先"></input>
+	</nav>
+	<div class="search">
+		<input type="text" id="searchText" ></input>
+		<input type="button" id="searchButton" value="查询"></input>
+		<p id='tips' style="color:red"></p>
+	</div>
+
+
+		<div class="a1"><span>a1</span>
+		<div class="b10"><span>b10</span>
+			<div class="c100"><span>c100</span>
+				<div class="d1000"><span>d1000</span></div>
+				<div class="d1001"><span>d1001</span></div>
+				<div class="d1002"><span>d1002</span></div>
+				<div class="d1003"><span>d1003</span></div>
+
+			</div>
+			
+		</div>
+		<div class="b11"><span>b11</span>
+			<div class="c110"><span>c110</span>
+				<div class="d1100"><span>d1100</span></div>
+				<div class="d1101"><span>d1101</span></div>
+				<div class="d1102"><span>d1102</span></div>
+			</div>
+			<div class="c111"><span>c111</span>
+				<div class="d1110"><span>d1110</span>
+					<div class="e11110"><span>e11110</span></div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="b12"><span>b12</span></div>
+	</div>
+	</div>
+<script type="text/javascript">
+	//创建一个树的类
+	function Tree(){
+		this.queue=[];
+		this.search=[];
+		this.tips = document.getElementById('tips');
+
+		this.root=document.querySelector(".a1");
+	}
+	
+/*
+*深度优先遍历节点
+*传入的参数为根节点 
+ */
+	Tree.prototype.deep=function(rootNode){
+		
+		
+		this.queue.push(rootNode);
+		//获取根结点的子代div元素
+		var div=rootNode.querySelectorAll("."+rootNode.className+">div");
+		
+		
+		if(div.length){
+			for (var i = 0; i < div.length; i++) {
+				this.deep(div[i]);
+			}
+		}		
+	}
+
+	/**
+	 * 广度优先遍历节点
+	 * @param  {element or NodeList} nodeArr 第i层的节点
+	 * @return {遍历的数组}         
+	 */
+	Tree.prototype.spread=function(nodeArr){
+		var subNode=[];
+
+		if(nodeArr==this.root){
+			this.queue.push(this.root);
+			
+			this.spread(document.querySelectorAll("."+this.root.className+">div"));
+		}else{
+			
+			//获取根结点的子代div元素
+			if(nodeArr.length){
+				for(var j=0; j<nodeArr.length; j++){
+					this.queue.push(nodeArr[j]);
+					var div=document.querySelectorAll("."+nodeArr[j].className+">div");
+					for (var i = 0; i < div.length; i++) {
+						subNode.push(div[i]);
+					}
+					
+				}
+				this.spread(subNode);
+			}
+		}
+	
+	}
+
+	/**
+	 * 实现查找节点的操作
+	 * @return {Array} 返回符合要求的节点
+	 */
+	Tree.prototype.searchF=function(){
+		this.search=[];
+		var value=document.getElementById("searchText").value;
+		var reg=new RegExp(value);
+		
+		for (var i = 0; i < this.queue.length; i++) {
+			
+			var val=this.queue[i].firstElementChild.innerHTML;
+			console.log(val);
+			
+			 if(reg.test(val)){
+			 	this.search.push(this.queue[i]);
+			 }
+		}
+	}
+
+	/**
+	 * 实现遍历时的动画效果
+	 * 
+	 */
+	Tree.prototype.show=function(){
+		var timer=null;
+		clearInterval(timer);
+		var queue=this.queue;
+		var len=queue.length;
+		var search=this.search;
+		var tips = this.tips;
+		console.log(search);
+		
+		var i=0;
+		
+		timer=setInterval(function(){
+			if (i<queue.length) {
+				if(i>0&&search.indexOf(queue[i-1])<0){
+					queue[i-1].style.backgroundColor = "#FFFFFF";
+				}
+				
+				queue[i].style.backgroundColor="#6AE3A5";
+				i++;
+			}else{
+				//console.log(i);
+				queue[i-1].style.backgroundColor='#FFFFFF';
+				if(!search.length){
+			  	tips.innerHTML = '没有匹配项';
+				}
+				clearInterval(timer);		
+			}
+	
+		},500)
+		
+		
+	}
+	/**
+	 * 初始化函数 主要实现元素事件的绑定
+	 * 
+	 */
+	function init(){
+	
+		var tree=new Tree();
+
+		
+		var nav=document.getElementsByTagName("nav");
+		nav[0].onclick=function(e){
+			
+			var target=e.target;
+			if(target.getAttribute("type")=="button"){
+				console.log(target);
+				var classN=target.className;
+				console.log(classN);
+				switch (classN){
+					case "deep" : {tree.queue=[];tree.deep(tree.root);}break;
+					case "spread" : {tree.queue=[];tree.spread(tree.root);}break;
+					
+				}
+				tree.show();
+				
+			}
+		}
+		document.getElementById("searchButton").onclick=function(){
+			tree.queue=[];
+			
+			tree.deep(tree.root);
+			tree.searchF();
+			tree.show();
+		}
+	}
+
+	init();
+	</script>
+	</body>
+	</html>	

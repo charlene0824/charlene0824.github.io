@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单联动</title>
+	<style type="text/css">
+	body{
+		font-family: '微软雅黑'
+	}
+	form{
+		margin:0 auto;
+		width:400px;
+		text-align: center;
+		padding-top:10px;
+	}
+	label{
+		display: inline-block;
+		width:80px;
+		height:40px;
+		line-height: 40px;
+		font-size:14px;
+		font-weight: 600px;
+		text-align: right;
+		padding-right:5px;
+
+	}
+	select{
+		/*将select选择框样式清除*/
+		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		display: inline-block;
+		padding:5px;
+		width:150px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #E9F2AB;
+    background-color: white;
+    background-repeat: no-repeat;
+    /*背景图像的尺寸：第一个值为宽度，第二值为高度*/
+    background-size: 4px 8px, 4px 8px, 20px 30px, 1px 30px;
+    /*背景图片：多张图片用","分割*/
+    /*repeating-linear-gradient() 函数用于重复线性渐变：参数分别为角度，颜色1，颜色2,...*/
+     /*组合成三角形图标*/
+    background-image: repeating-linear-gradient(225deg, rgb(105, 123, 149) 0%, rgb(105, 123, 149) 50%, transparent 50%, transparent 100%),
+    
+     
+    repeating-linear-gradient(135deg, rgb(105, 123, 149) 0%, rgb(105, 123, 149) 50%, transparent 50%, transparent 100%),
+    
+     
+    linear-gradient(#FFFFFF 0%, #F8F9Fd, #EFFAFA 100%),
+     
+    repeating-linear-gradient( rgb(191, 204, 220) 0%, rgb(191, 204, 220) 100%);
+    /*竖分割线*/
+    /*背景图片的位置：第一个参数为水平位置，第二参数为垂直位置*/
+     
+    background-position: 135px 10px, 139px 10px, right top, 137px top;
+
+	}
+	.work-place{
+		width:200px;
+		line-height: 30px;
+		border:1px solid #007CFF;
+		border-radius: 5px;
+	}
+	#school-student,#work-student{
+		margin-top: 10px;
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<form>
+		<div class="student" id='student'>
+		<input type="radio" name="status" value='student'>在校生
+		<input type="radio" name="status" value='work'>非在校生</div>
+		<div id = 'school-student'>
+		<label>学校</label>
+			<select name='city' id = 'city'>
+				<option>请选择城市</option>
+				<option>北京</option>
+				<option>大连</option>
+			</select>
+			<select name='school' id = 'school'>
+				<option>请选择所在学校</option>
+			</select>
+		</div>
+		<div id='work-student'>
+			<label>就业单位</label><input type="text" name="work-place" class='work-place'>
+		</div>
+	</form>
+	<script type="text/javascript">
+		var citySchool = {
+			"北京":['北京大学','清华大学','北京理工大学'],
+			'大连':['大连理工大学','大连海事大学']
+		}
+		var city = document.getElementById('city');
+		var school = document.getElementById('school');
+		var student = document.getElementById('student');
+		var school_stud = document.getElementById('school-student');
+		var school_work = document.getElementById('work-student');
+		city.onchange = function(e){
+			school.innerHTML = '<option>请选择所在学校</option>';
+			console.log(this.value);
+			var showValue = citySchool[this.value];
+			var str = ''
+			for(var i = 0 ;i < showValue.length; i++){
+				str += "<option>" + showValue[i] + "</option>";
+			}
+			school.innerHTML += str;
+		}
+
+		// 给含有单选框的div添加click方法
+		student.onclick = function(e){
+			if(e.target.getAttribute('name') == 'status'){
+				if(e.target.getAttribute('value')=='student'){
+					school_stud.style.display = 'block';
+					if(school_work){
+						school_work.style.display = 'none';
+					}
+					
+				} else {
+					school_work.style.display = 'block';
+					if(school_stud){
+						school_stud.style.display = 'none';
+					}
+					
+				}
+			}
+		}
+
+
+	</script>
+</body>
+</html>

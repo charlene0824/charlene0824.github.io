@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单验证</title>
+	<style type="text/css">
+	input:placeholder{
+		text-indent: 5px;
+
+	}
+	input::-ms-clear{
+		display: none;
+	}
+	input{
+		outline: none;
+	}
+	input:focus{
+		box-shadow: 0 0 5px #6EB3E4;
+	}
+
+	.form{
+		width:600px;
+		margin:0 auto;
+	}
+	.text{
+		border:1px solid #6E93E9;
+		width:300px;
+		height:40px;
+		border-radius: 5px;
+		text-indent: 5px;
+	}
+	
+	.check{
+		background-color: #DD3A41;
+		border:none;
+		outline: none;
+		border-radius:5px;
+		width:80px;
+		height:40px;
+		color:white;
+		display: block;
+		text-align: center;
+		margin:0 auto;
+	}
+	.cont{
+	
+		margin: 10px 5px;
+	}
+	.cont label{
+		line-height: 40px;
+		display: inline-block;
+		width:80px;
+		height:40px;
+		text-align: right;
+		vertical-align: top;
+	}
+	.info{
+		display: inline-block;
+		width:500px;
+	}
+	.tips{
+		display: none;
+		font-size: 14px;
+		color:#bbb;
+		padding-left: 5px;
+	}
+	.pass-level{
+		width:35px;
+		height:8px;
+		font-size:12px;
+		display: inline-block;
+		margin-left:5px;
+		background-color: #CCCCCC;
+	}
+	.level{
+		display: none;
+	}
+
+	</style>
+</head>
+<form class="form">
+<div class="cont">
+	<label>名称：</label>
+	<div class="info">
+	<input type="text" class="text" placeholder="请输入名称" id="name"></input>
+	<span class="tips">必填，长度为4~16个字符</span>
+	</div>
+</div>
+<div class="cont">
+<label>密码：</label>
+<div class="info">
+
+	<input type="password" class="text pass" placeholder="请输入密码" id="pass" />
+		<span class="tips">密码可为数字、字母、符号等</span>
+	<span class="level"><i class="pass-level"></i> <i class="pass-level"></i><i class="pass-level"></i></span>
+	
+
+</div>
+</div>
+<div class="cont">
+<label>密码确认：</label>
+<div class="info">
+	<input type="password" class="text" placeholder="请再次输入密码" id="repass"></input>
+	<span class="tips">请重新输入密码</span>
+</div>
+</div>
+<div class="cont">
+<label>邮箱：</label>
+<div class="info">
+	<input type="mail" class="text" placeholder="请输入邮箱地址" id="mail"></input>
+	<span class="tips">请输入邮箱地址</span>
+</div>
+</div>
+<div class="cont">
+<label>手机号码：</label>
+<div class="info">
+	<input type="text" class="text" placeholder="请输入手机号" id="phone"></input>
+	<span class="tips">请输入您的手机号</span>
+</div>
+</div>
+
+	<input type="submit" id="check" value="验证" class="check"></input>
+
+</form>
+	<script type="text/javascript">
+		/*.字符数为4~16位
+2.每个英文字母、数字、英文符号长度为1
+3.每个汉字，中文符号长度为2*/
+var user = document.getElementById("name");
+var pass = document.getElementById("pass");
+var repass = document.getElementById("repass");
+var mail = document.getElementById("mail");
+var phone = document.getElementById("phone");
+var check = document.getElementById("check");
+
+var form = document.querySelector('.form');
+
+form.addEventListener("focus",function(e){
+	
+	var e= e? e: window.event;
+	var target = e.target||e.srcElement;
+	
+	if(target.tagName.toLowerCase()=="input" && target.getAttribute("type")!="submit" && target.value=='') {
+		target.parentNode.getElementsByTagName("span")[0].style.display = "inline";
+	}
+
+},true)
+
+
+pass.oninput = function(e){
+	console.log("inout");
+	this.parentNode.getElementsByTagName("span")[0].style.display = "none";
+	this.parentNode.getElementsByTagName("span")[1].style.display = "inline";
+	var e= e? e: window.event;
+	var target = e.target||e.srcElement;
+	var passValue = pass.value;
+		var level = checkStrong(passValue);
+		var levelView = pass.parentNode.getElementsByTagName("i");
+		var passSpan = pass.parentNode.getElementsByTagName("span")[0];
+		for (var i = 0; i < levelView.length; i++) {
+			levelView[i].style.backgroundColor = '';
+		}
+		console.log(levelView);
+		switch (level) {
+			case 0: {	target.parentNode.getElementsByTagName("span")[1].style.display = "none";
+			target.parentNode.getElementsByTagName("span")[0].style.display = "inline";checked(passSpan,false,"密码至少6位");};break;
+			case 1: levelView[0].style.backgroundColor = "red";break;
+			case 2: {levelView[0].style.backgroundColor = "red";levelView[1].style.backgroundColor = "yellow"};break;
+			case 3:
+			case 4: {levelView[0].style.backgroundColor = "red";levelView[1].style.backgroundColor = "yellow";levelView[2].style.backgroundColor = "green";};break;
+
+		}
+}
+form.addEventListener("blur", function(e){
+	var e= e? e: window.event;
+	var target = e.target||e.srcElement;
+	if(target.getAttribute("id")=="name"){
+		var nameValue = user.value;
+		var length = getStrlen(nameValue);
+		if(length>16 || length<4) {
+			checked(user,false,"格式输入错误");
+		} else {
+			checked(user,true,"输入正确");
+
+		}
+	}
+
+	if(target.getAttribute('id')=='repass'){
+		var pass = document.getElementById('pass').value;
+		var repass = document.getElementById('repass').value;
+		if(pass == repass && repass != ''){
+			checked(document.getElementById('repass'),true,'密码正确');
+		}else {
+			checked(document.getElementById('repass'),false,'密码不一致');
+			document.getElementById('repass').value = '';
+		}
+	}
+
+	if(target.getAttribute('id') =='mail'){
+		var mail = document.getElementById('mail').value;
+		if(/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(mail)){
+			checked(document.getElementById('mail'),true,'邮箱格式正确');
+		} else {
+			checked(document.getElementById('mail'),false,'邮箱格式不正确');
+			document.getElementById('mail').value ='';
+		}
+	}
+
+	if(target.getAttribute('id') =='phone'){
+		var phone = document.getElementById('phone').value;
+		if(/^1\d{10}$/.test(phone)){
+			checked(document.getElementById('phone'),true,'手机格式正确');
+		} else {
+			checked(document.getElementById('phone'),false,'手机格式不正确');
+			document.getElementById('phone').value ='';
+		}
+	}
+
+},true);
+
+function checked(elem,bool,info){
+
+	var span = elem.parentNode.getElementsByTagName("span")[0];
+	console.log(span);
+	if(bool){
+		span.style.color = 'green';
+		span.innerHTML = info;
+	} else {
+		span.style.color = "red";
+		span.innerHTML = info;
+
+	}
+}
+//确定字符串长度
+function getStrlen(str){
+ var json = {len:0};
+ var re = /[\u4e00-\u9fa5]/;
+ console.log(str);
+ for (var i = 0; i < str.length; i++) {
+  if(re.test(str.charAt(i))){
+   json['len']++;
+  }
+ };
+ return json['len']+str.length;
+}
+//密码强度检测
+function checkStrong(sValue) {
+    var modes = 0;
+    //正则表达式验证符合要求的
+    if (sValue.length < 6) return modes;
+    if (/\d/.test(sValue)) modes++; //数字
+    if (/[a-z]/.test(sValue)) modes++; //小写
+    if (/[A-Z]/.test(sValue)) modes++; //大写  
+    if (/\W/.test(sValue)) modes++; //特殊字符
+    if(sValue.length>12) modes++;
+    return modes;
+    
+}
+
+
+	</script>
+
+</body>
+</html>

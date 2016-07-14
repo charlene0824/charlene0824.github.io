@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task4</title>
+	<style type="text/css">
+	.container{
+		margin:0 auto;
+		width:800px;
+		height:600px;
+		border:1px solid #ccc;
+		position:relative;
+	}
+	.middle{
+		position:absolute;
+		left:50%;
+		top:50%;
+		transform: translate(-50%,-50%);
+		width:400px;
+		height:200px;
+		background-color: #ccc;
+
+	}
+	.corner{
+		background-color: #FBE903;
+		width:50px;
+		height:50px;
+	}
+	.left{
+		border-radius: 0 0 50px 0 ;
+	}
+	.right{
+		border-radius: 50px 0 0 0;
+		position:absolute;
+		right:0;
+		bottom:0;
+
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="middle">
+			<div class="corner left"></div>
+			<div class="corner right"></div>
+		</div>
+	</div>
+</body>
+</html>

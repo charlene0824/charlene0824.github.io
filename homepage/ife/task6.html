@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task10</title>
+	<style type="text/css">
+	
+	.div-first{
+			border:1px solid #f00;
+			width:200px;
+			height:150px;
+			margin-bottom: 10px;
+			
+
+		}
+		.div-second{
+			border:1px solid #f00;
+			width:150px;
+			height:100px;
+			margin-bottom: 10px;
+			
+		}
+		.div-third{
+			border: 1px solid #f00;
+			width:100px;
+			height:50px;
+			margin-bottom: 10px;
+			
+		}
+		.div-fouth{
+			border:1px solid #0f0;
+			width:100px;
+			height:200px;
+			margin-bottom: 10px;
+		}
+	@media screen and (min-width:640px){
+		.container{
+			padding:20px;
+			display: flex;
+			/*width:100%;*/
+			justify-content: space-between;
+			flex-wrap:wrap;
+			align-items: center;
+		}
+		
+	} 
+	@media screen and (max-width:640px){
+		.container{
+			display: flex;
+			/*width:100%;*/
+			/*justify-content用来定义伸缩项目沿着主轴线的对齐方式*/
+			justify-content: space-between;
+			/*align-content用来调准伸缩行在伸缩容器里的对齐方式*/
+			flex-flow:row wrap;
+			/*align-items:伸缩项目在侧轴方向的位置*/
+			align-items:flex-start;
+		}
+
+		
+		.div-fouth{
+			
+			
+			order:-1;
+		}
+	} 
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class=" div-first"></div>
+		<div class=" div-second"></div>
+		<div class=" div-third"></div>
+		<div class=" div-fouth"></div>
+	</div>
+
+</body>
+</html>

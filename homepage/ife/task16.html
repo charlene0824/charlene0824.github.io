@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>task16:JavaScript和树</title>
+		<style type="text/css">
+
+		nav{
+			width:300px;
+			margin:0 auto;	
+		}
+
+		.search{
+			display: block;
+			margin: 0 auto;
+			padding:10px;
+			width:300px;
+		}
+		
+		.a,.b,.c,.d,.e{
+			display: flex;
+			justify-content:space-around;
+			align-items: center;
+			border:1px solid #7BF0EC;
+			margin:0 5px;
+			background-color: #fff;
+
+		}
+
+		.a{
+			
+			height:300px;
+			
+		}
+		.b{
+			
+			height:250px;
+			
+		}
+		.c{
+			
+			height:200px;
+			
+		}
+		.d{
+			height:150px;
+		}
+		.e{
+			height:100px;
+		}
+		.f{
+			height:50px;
+		}
+		.sub-search{
+			margin-top:10px;
+		}
+		</style>
+	</head>
+	<body>
+	<div>
+	<nav>
+		<input type="button" class="deep" value="深度优先"></input>
+		<input type="button" class="spread" value="广度优先"></input>
+	</nav>
+	<div class="search">
+	<div class = 'sub-search'>
+		<input type="text" id="searchText" ></input>
+		<input type="button" id="searchButton" value="查询"></input>
+	</div>
+	<div class='sub-search'>
+
+		<input type="text" placeholder="请输入插入节点的内容" class="text-add"></input>
+		<input type="button" value="添加" class='add-button'></input>
+		<input type="button" value="删除" class='delete-button'></input>
+	</div>
+	</div>
+
+
+		<div class="a ">a1
+		<div class="b ">b10
+			<div class="c ">c100
+				<div class="d ">d1000</div>
+				<div class="d ">d1001</div>
+				<div class="d ">d1002</div>
+				<div class="d ">d1003</div>
+
+			</div>
+			
+		</div>
+		<div class="b">b11
+			<div class="c">c110
+				<div class="d">d1100</div>
+				<div class="d">d1101</div>
+				<div class="d">d1102</div>
+			</div>
+			<div class="c">c111
+				<div class="d">d1110
+					<div class="e">e11110</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="b">b12</div>
+	</div>
+	</div>
+	
+<script type="text/javascript">
+
+//创建一个树的类
+	function Tree(){
+		this.queue=[];//存储树的节点元素
+		this.search=[];//查询的节点
+		
+		this.root=document.querySelector(".a");
+	}
+	
+/*
+*深度优先遍历节点
+*传入的参数为根节点 
+ */
+	Tree.prototype.deep=function(rootNode){
+		
+		
+		this.queue.push(rootNode);
+		//获取根结点的子代div元素
+		var div=rootNode.querySelectorAll("."+rootNode.className+">div");
+		
+		if(div.length){
+			for (var i = 0; i < div.length; i++) {
+				this.deep(div[i]);
+			}
+		}		
+	}
+
+	/**
+	 * 广度优先遍历节点
+	 * @param  {element or NodeList} nodeArr 第i层的节点
+	 * @return {遍历的数组}         
+	 */
+	Tree.prototype.spread=function(nodeArr){
+		var subNode=[];
+
+		if(nodeArr==this.root){
+			this.queue.push(this.root);
+			
+			this.spread(document.querySelectorAll("."+this.root.className+">div"));
+		}else{
+			
+			//获取根结点的子代div元素
+			if(nodeArr.length){
+				for(var j=0; j<nodeArr.length; j++){
+					this.queue.push(nodeArr[j]);
+					var div=document.querySelectorAll("."+nodeArr[j].className+">div");
+					for (var i = 0; i < div.length; i++) {
+						subNode.push(div[i]);
+					}
+					
+				}
+				this.spread(subNode);
+			}
+		}
+	
+	}
+
+	/**
+	 * 实现查找节点的操作
+	 * @return {Array} 返回符合要求的节点
+	 */
+	Tree.prototype.searchF=function(){
+		this.search=[];
+		var value=document.getElementById("searchText").value;
+		var reg=new RegExp(value);
+		
+		for (var i = 0; i < this.queue.length; i++) {
+			
+			var val=this.queue[i].innerHTML.substring(0,this.queue[i].innerHTML.indexOf("<div>"));
+			
+			 if(reg.test(val)){
+			 	this.search.push(this.queue[i]);
+			 }
+		}
+	}
+
+	/**
+	 * 实现遍历时的动画效果
+	 * 
+	 */
+	Tree.prototype.show=function(){
+		console.log(this.queue);
+		var timer=null;
+		clearInterval(timer);
+		var queue=this.queue;
+		var len=queue.length;
+		var search=this.search;
+		console.log(search);
+		
+		var i=0;
+		
+		timer=setInterval(function(){
+			if (i<queue.length) {
+				if(i>0&&search.indexOf(queue[i-1])<0){
+					queue[i-1].style.backgroundColor = "#FFFFFF";
+				}
+				
+				queue[i].style.backgroundColor="#6AE3A5";
+				i++;
+			}else{
+				//console.log(i);
+				queue[i-1].style.backgroundColor='#FFFFFF';
+				clearInterval(timer);		
+			}
+	
+		},500)
+		
+	}
+
+	/**
+	 * 添加树的节点
+	 * @param {节点元素} node  需要添加节点的父元素
+	 * @param {String} value 添加的节点的值
+	 */	
+	Tree.prototype.addTree=function(node,value){
+		var div=document.createElement("div");
+		var parentClass=node.className;
+		console.log(parentClass);
+		
+		div.innerHTML=value;
+
+		div.className=String.fromCharCode(parentClass.charCodeAt(0)+1);
+		node.appendChild(div);
+	}
+
+	/**
+	 * 删除树的节点及其子节点
+	 * @param  {节点元素} node 需要删除的节点
+	 */
+	Tree.prototype.deleteTree=function(node){
+		var parent=node.parentNode;
+		parent.removeChild(node);
+	}
+	/**
+	 * 初始化函数 主要实现元素事件的绑定
+	 * 
+	 */
+	function init(){
+	
+		var tree=new Tree();
+
+		
+		var nav=document.getElementsByTagName("nav");
+		nav[0].onclick=function(e){
+			
+			var target=e.target;
+			if(target.getAttribute("type")=="button"){
+				console.log(target);
+				var classN=target.className;
+				console.log(classN);
+				switch (classN){
+					case "deep" : {tree.queue=[];tree.deep(tree.root);}break;
+					case "spread" : {tree.queue=[];tree.spread(tree.root);}break;
+					
+				}
+				tree.show();
+				
+			}
+		}
+		/**
+		 * 查询按钮绑定事件
+		 * @return 查询的结果 对查询的结果添加背景
+		 */
+		document.getElementById("searchButton").onclick=function(){
+			tree.queue=[];
+			
+			tree.deep(tree.root);
+			tree.searchF();
+			tree.show();
+		}
+		/**
+		 * 树的根结点绑定事件 当点击树的元素时 选中节点背景发生变化 当点击添加按钮时 节点添加子元素 点击删除按钮时 删除当前节点及其子节点
+		 */
+		tree.root.onclick=function(e){
+			this.style.backgroundColor="#fff";
+			var div=this.querySelectorAll(" div");
+			for (var i = 0; i < div.length; i++) {
+				div[i].style.backgroundColor="#fff";
+			}
+			var target=e.target;
+			target.style.backgroundColor='#59E46F';
+
+			var addButton=document.querySelector(".add-button");
+			addButton.onclick=function(){
+				var addValue=document.querySelector(".text-add").value;
+				if(addValue){
+					tree.addTree(target,addValue);
+				}else{
+					alert("请输入插入节点的内容");
+				}
+			}
+
+			var deleteButton=document.querySelector(".delete-button");
+			deleteButton.onclick=function(){
+				tree.deleteTree(target);
+			}
+
+		}
+	}
+
+	init();
+	</script>
+	</body>
+	</html>	

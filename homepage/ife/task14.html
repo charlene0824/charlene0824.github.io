@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task14:二叉树的遍历</title>
+	<style type="text/css">
+		.a1{
+			/*display: flex;*/
+			width:800px;
+			height:400px;
+			border:1px solid black;
+			margin:0 auto;
+		}
+		.b10,.b11{
+			display: inline-block;
+			margin:10px;
+			width:360px;
+			height:350px;
+			border:1px solid #89F67A;
+		}
+		.c100,.c101,.c110,.c111{
+			display: inline-block;
+			width:130px;
+			margin:20px;
+			height:300px;
+			border:1px solid #EDE032;
+		}
+		.d1000,.d1001,.d1010,.d1011,.d1100,.d1101,.d1110,.d1111{
+			display: inline-block;
+			width:30px;
+			margin:10px;
+			height:250px;
+			border:1px solid #EC765C;
+		}
+		nav{
+			width:300px;
+			margin:0 auto;
+			padding:20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="a1">
+		<div class="b10">
+			<div class="c100">
+				<div class="d1000"></div>
+				<div class="d1001"></div>
+			</div>
+			<div class="c101">
+				<div class="d1010"></div>
+				<div class="d1011"></div>
+			</div>
+		</div>
+		<div class="b11">
+			<div class="c110">
+				<div class="d1100"></div>
+				<div class="d1101"></div>
+			</div>
+			<div class="c111">
+				<div class="d1110"></div>
+				<div class="d1111"></div>
+			</div>
+		</div>
+	</div>
+	<nav>
+		<input type="button" class="preOrder" value="前序遍历"></input>
+		<input type="button" class="midOrder" value="中序遍历"></input>
+		<input type="button" class="postOrder" value="后序遍历"></input>
+	</nav>
+<script type="text/javascript">
+	//创建一个树的类
+	function Tree(){
+		this.queue=[];
+		
+		this.root=document.querySelector(".a1");
+	}
+	//创建树的遍历方法 主要应用递归调用的思想
+/*
+*前序遍历：中 左 右
+*传入的参数为根节点 
+ */
+	Tree.prototype.preOrder=function(rootNode){
+		this.queue.push(rootNode);
+		if(rootNode.firstElementChild){
+			var classN=rootNode.firstElementChild.className
+			var num=classN.charAt(classN.length-1);
+			if(num==0){
+				this.preOrder(rootNode.firstElementChild);
+			}
+			
+		}
+		if(rootNode.lastElementChild){
+			this.preOrder(rootNode.lastElementChild);
+		}
+	}
+
+	/**
+	 * 实现二叉树的中序遍历（左中右）
+	 * @param  {元素节点} rootNode 根结点的元素节点
+	 * @return {数组}          中序遍历后的一维数组
+	 */
+	Tree.prototype.midOrder=function(rootNode){
+		
+		if(rootNode.firstElementChild){
+			var classN=rootNode.firstElementChild.className
+			var num=classN.charAt(classN.length-1);
+			if(num==0){
+				this.midOrder(rootNode.firstElementChild);
+			}
+		}
+		this.queue.push(rootNode);
+		if(rootNode.lastElementChild){
+			this.midOrder(rootNode.lastElementChild);
+		}
+	}
+	/**
+	 * 实现二叉树的后序遍历 左 右 中
+	 * @param  {元素节点} rootNode 根结点的元素节点
+	 * @return {数组}          后序遍历后的一维数组
+	 */
+	Tree.prototype.postOrder=function(rootNode){
+
+		if(rootNode.firstElementChild){
+			var classN=rootNode.firstElementChild.className
+			var num=classN.charAt(classN.length-1);
+			if(num==0){
+				this.postOrder(rootNode.firstElementChild);
+			}
+		}
+		if(rootNode.lastElementChild){
+			this.postOrder(rootNode.lastElementChild);
+		}
+		
+		
+		this.queue.push(rootNode);
+	}
+	/**
+	 * 实现遍历时的动画效果
+	 * 
+	 */
+	Tree.prototype.show=function(){
+		var timer=null;
+		clearInterval(timer);
+		var queue=this.queue;
+		var len=queue.length;
+	
+		
+		var i=0;
+		timer=setInterval(function(){
+			if (i<queue.length) {
+				if(i>0){
+					queue[i-1].style.backgroundColor = "#FFFFFF";
+				}
+				
+				queue[i].style.backgroundColor="#6AE3A5";
+				i++;
+			}else{
+				queue[i-1].style.backgroundColor='#FFFFFF';
+				clearInterval(timer);		
+			}
+	
+		},500)
+		
+	}
+	/**
+	 * 初始化函数 主要实现元素事件的绑定
+	 * 
+	 */
+	function init(){
+	
+		var tree=new Tree();
+
+		//tree.preOrder(tree.root);
+		//tree.show();
+		var nav=document.getElementsByTagName("nav");
+		nav[0].onclick=function(e){
+			//tree.queue=[];
+			var target=e.target;
+			if(target.tagName.toLowerCase()=="input"){
+				var classN=target.className;
+				console.log(classN);
+				switch (classN){
+					case "preOrder" : {tree.queue=[];tree.preOrder(tree.root);}break;
+					case "midOrder" : {tree.queue=[];tree.midOrder(tree.root);}break;
+					case "postOrder" : {tree.queue=[];tree.postOrder(tree.root);};break;
+				}
+				tree.show();
+				
+			}
+		}
+
+	}
+
+	init();
+
+</script>
+		
+</body>
+</html>

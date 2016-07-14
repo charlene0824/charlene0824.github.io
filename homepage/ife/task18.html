@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单验证</title>
+	<style type="text/css">
+	input[type="text"]:placeholder{
+		text-indent: 5px;
+
+	}
+	input[type="text"]::-ms-clear{
+		display: none;
+	}
+	input[type="text"]{
+		outline: none;
+	}
+	input[type="text"]:focus{
+		box-shadow: 0 0 5px #6EB3E4;
+	}
+	.text{
+		border:1px solid #6E93E9;
+		width:200px;
+		height:40px;
+		border-radius: 5px;
+		text-indent: 5px;
+	}
+	#check{
+		background-color: #DD3A41;
+		border:none;
+		outline: none;
+		border-radius:5px;
+		width:80px;
+		height:40px;
+		color:white;
+		vertical-align: top;
+
+	}
+	.cont{
+		display: inline-block;
+		width:205px;
+	}
+	.tips{
+		font-size: 14px;
+		color:#bbb;
+		padding-left: 5px;
+
+	}
+	</style>
+</head>
+<body>
+<div class="cont">
+	<input type="text" class="text" placeholder="请输入名称" id="text"></input>
+	<span class="tips" id="tips">必填，长度为4~16个字符</span>
+</div>
+	<input type="button" id="check" value="验证"></input>
+
+	<script type="text/javascript">
+		/*.字符数为4~16位
+2.每个英文字母、数字、英文符号长度为1
+3.每个汉字，中文符号长度为2*/
+var text = document.getElementById("text");
+var check = document.getElementById("check");
+var tips = document.getElementById("tips");
+
+check.onclick = function(e){
+	var value = text.value;
+	var length = getStrlen(value);
+	if(length>16 || length<4) {
+		tips.style.color = 'red';
+		tips.innerHTML = "输入的字符数不正确";
+	} else {
+		tips.style.color = "green";
+		tips.innerHTML = "格式正确";
+
+	}
+
+
+}
+//确定字符串长度
+function getStrlen(str){
+ var json = {len:0};
+ var re = /[\u4e00-\u9fa5]/;
+ for (var i = 0; i < str.length; i++) {
+  if(re.test(str.charAt(i))){
+   json['len']++;
+  }
+ };
+ return json['len']+str.length;
+}
+
+
+	</script>
+
+</body>
+</html>

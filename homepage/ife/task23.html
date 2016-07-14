@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>行走的小方块</title>
+	<style type="text/css">
+	.wrap{width:800px;margin:0 auto;}
+	.cont{
+		width:500px;height:500px;border:1px solid #ccc;position: relative;display: inline-block;
+	}
+	.walk{
+		width:50px;height:50px;background: #F0A1E6;position: absolute;top:200px;left:200px;
+	}
+	.walk span{
+		width:50px;display: inline-block;height:10px;background-color: #B0F9AE;vertical-align: top;
+	}
+	.aside{display:inline-block;width:250px;margin-left:30px; font-size: 14px;font-family: '微软雅黑';vertical-align: top;}
+	.aside input{height:30px; border-radius: 5px;outline: none;border:1px solid #eee;}
+	.aside button{height:30px;background-color: #8AF1CB;border:none;outline: none;border-radius: 5px}
+	.aside button:hover{opacity: .6 ;}
+	</style>
+</head>
+<body>
+<section class = 'wrap'>
+<div class='cont'>
+<canvas width='500' height='500' id='drawing'></canvas>
+<div class='walk' id="walk"><span></span></div>
+</div>
+
+<div class = 'aside'>
+	<input type="text" name="order"  id = 'order'>
+	<button id='send'>发布命令</button>
+	<ul>		
+    <li>TRA LEF：向屏幕的左侧移动一格，方向不变</li>
+    <li>TRA TOP：向屏幕的上面移动一格，方向不变</li>
+    <li>TRA RIG：向屏幕的右侧移动一格，方向不变）</li>
+    <li>TRA BOT：向屏幕的下面移动一格，方向不变</li>
+    <li>MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格</li>
+    <li>MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格</li>
+    <li>MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格</li>
+    <li>MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格</li>
+    <li>不区分大小写</li>
+
+	</ul>
+</div>
+
+</section>
+<script type="text/javascript" src='script/task23-block.js'></script>
+<script type="text/javascript" src='script/task23-script.js'></script>
+</body>
+</html>

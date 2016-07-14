@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>task17:JavaScript和树</title>
+		<style type="text/css">
+
+		nav{
+			width:300px;
+			margin:0 auto;	
+		}
+
+		.search{
+			display: block;
+			margin: 0 auto;
+			padding:10px;
+			width:300px;
+		}
+		
+		.a,.b,.c,.d,.e{
+			width:300px;
+			display: flex;
+			/* box-pack:start;
+			-webkit-box-pack:start;
+			box-align: start;
+			-webkit-box-align:start; */
+			-webkit-flex-direction: column; /* Safari */
+  		flex-direction: column;		
+			/* margin:0 5px; */
+			background-color: #fff;
+			/* padding:10px; */
+			overflow: hidden;
+			box-sizing:border-box;
+
+
+		}
+
+		.a{
+			display: flex;
+			width:300px;
+		}
+		.b{
+			
+			width:280px;
+			display: none; 
+			margin-left:20px;
+		}
+		.c{
+			width:260px;	
+			display: none;
+			margin-left:20px;
+		}
+		.d{
+			width:240px;
+			display: none;
+			margin-left:20px;
+		}
+		.e{
+			width:220px;
+			display: none;
+			margin-left:20px;
+		}
+		.line{
+			border-bottom:2px solid #CF777C;
+			height:30px;
+			line-height:30px;
+			padding-left:5px;
+			margin:0;
+		}
+		.line:hover{
+			background-color:#eee;
+		}
+		.tag{
+			display:inline-block;
+			width:10px;
+			height:10px;
+			box-sizing: border-box;
+			border-left:5px solid #868888;
+			border-right:5px solid transparent;
+			border-top:5px solid transparent;
+			border-bottom:5px solid transparent;
+		}
+		.tag-unfold{
+			display:inline-block;
+			width:10px;
+			height:10px;
+			box-sizing: border-box;
+			border-top:5px solid #868888;
+			border-right:5px solid transparent;
+			border-left:5px solid transparent;
+			border-bottom:5px solid transparent;
+		}
+		.sub-search{
+			margin-top:10px;
+		}
+		.center{
+			width:350px;
+			margin:0 auto;
+		}
+		</style>
+	</head>
+	<body>
+	<div class="center">
+	<nav>
+		<input type="button" class="deep" value="深度优先"></input>
+		<input type="button" class="spread" value="广度优先"></input>
+	</nav>
+	<div class="search">
+	<div class='sub-search'>
+		<input type="text" id="searchText" ></input>
+		<input type="button" id="searchButton" value="查询"></input>
+	</div>
+	<div class='sub-search'>
+		<input type="text" placeholder="请输入插入节点的内容" class="text-add"></input>
+		<input type="button" value="添加" class='add-button'></input>
+		<input type="button" value="删除" class='delete-button'></input>
+	</div>
+	</div>
+
+
+		<div class="a " id="root"><p class='line'><span class='tag'></span>a1</p>
+		<div class="b "><p class='line'><span class='tag'></span>
+		b10</p>
+			<div class="c "><p class='line'><span class='tag'></span>c100</p>
+				<div class="d "><p class='line'><span class='tag'></span>d1000</p></div>
+				<div class="d "><p class='line'><span class='tag'></span>d1001</p></div>
+				<div class="d "><p class='line'><span class='tag'></span>d1002</p></div>
+				<div class="d "><p class='line'><span class='tag'></span>d1003</p></div>
+
+			</div>
+			
+		</div>
+		<div class="b"><p class='line'><span class='tag'></span>b11</p>
+			<div class="c"><p class='line'><span class='tag'></span>c110</p>
+				<div class="d"><p class='line'><span class='tag'></span>d1100</p></div>
+				<div class="d"><p class='line'><span class='tag'></span>d1101</p></div>
+				<div class="d"><p class='line'><span class='tag'></span>d1102</p></div>
+			</div>
+			<div class="c"><p class='line'><span class='tag'></span>c111</p>
+				<div class="d"><p class='line'><span class='tag'></span>d1110</p>
+					<div class="e"><p class='line'><span class='tag'></span>e11110</p></div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="b"><p class='line'><span class='tag'></span>b12</p></div>
+	</div>
+	</div>
+<script type="text/javascript">
+
+//创建一个树的类
+	function Tree(){
+		this.queue=[];//存储树的节点元素
+		this.search=[];//查询的节点
+		
+		this.root=document.getElementById("root");
+	}
+	
+/*
+*深度优先遍历节点
+*传入的参数为根节点 
+ */
+	Tree.prototype.deep=function(rootNode){
+		
+		
+		this.queue.push(rootNode);
+		//获取根结点的子代div元素
+		var div=rootNode.children;
+		
+		if(div.length){
+			for (var i = 0; i < div.length; i++) {
+				if(div[i].tagName.toLowerCase()=="div"){
+					
+					this.deep(div[i]);
+				}
+				
+			}
+		}		
+	}
+
+	/**
+	 * 广度优先遍历节点
+	 * @param  {element or NodeList} nodeArr 第i层的节点
+	 * @return {遍历的数组}         
+	 */
+	Tree.prototype.spread=function(nodeArr){
+		var subNode=[];
+
+		if(nodeArr==this.root){
+			this.queue.push(this.root);
+			
+			this.spread(root.children);
+		}else{
+			
+			//获取根结点的子代div元素
+			if(nodeArr.length){
+				for(var j=0; j<nodeArr.length; j++){
+
+					if(nodeArr[j].tagName.toLowerCase()=="div"){
+						this.queue.push(nodeArr[j]);
+					}
+					var div=nodeArr[j].children;
+					for (var i = 0; i < div.length; i++) {
+						if(nodeArr[j].tagName.toLowerCase()=="div"){
+							subNode.push(div[i]);
+						
+						}
+					}
+					
+				}
+				this.spread(subNode);
+			}
+		}
+	
+	}
+
+	/**
+	 * 实现查找节点的操作
+	 * @return {Array} 返回符合要求的节点
+	 */
+	Tree.prototype.searchF=function(){
+		this.search=[];
+		var value=document.getElementById("searchText").value;
+		document.getElementById("searchText").value = '';
+		var reg=new RegExp(value);
+		
+		for (var i = 0; i < this.queue.length; i++) {
+			console.log(this.queue[i]);
+			console.log(this.queue[i].firstChild);
+			//var val=this.queue[i].querySelector('p').innerHTML;
+			var val = this.queue[i].firstChild.innerHTML.replace(/\<.+\>.*\<\/\w+\>/g, "").replace(/(^\s*)|(\s*$)/g, "");
+			console.log(val);
+			 if(reg.test(val)){
+			 	this.search.push(this.queue[i]);
+			 }
+		}
+	}
+
+	
+	/**
+	 * 实现树的折叠与打开
+	 * @param  {元素节点} node 点击的元素
+	 */
+	Tree.prototype.toggleTree=function(node){
+
+		var div=node.children;
+		//如果存在OPEN类 将该子元素隐藏，并将open类删除
+		
+		if(findClass(node,"open")){
+			console.log(node);	
+			for (var i = 0; i < div.length; i++) {
+				if(div[i].tagName.toLowerCase()=="div"){
+					div[i].style.display="none";
+					/*console.log(document.querySelector(queue[i] + ' .tip'));*/
+					node.querySelector('span').className = 'tag';
+				}
+				
+			}
+			node.className=deleteClass(node,"open");
+		}else{
+			//console.log(node.children);
+			//如果不存在open类 将该子元素显示 并添加open类
+			for (var i = 0; i < div.length; i++) {
+				if(div[i].tagName.toLowerCase()=="div"){
+					div[i].style.display="flex";
+					/*console.log(this.queue[i].querySelector('.tip'));*/
+					node.querySelector("span").className = 'tag-unfold';
+				}
+			} 
+			node.className=addClass(node,"open");
+					
+		}
+
+		
+	}
+
+	/**
+	 * 实现遍历时的动画效果
+	 * 
+	 */
+	Tree.prototype.show=function(){
+		console.log(this.queue);
+		var timer=null;
+		clearInterval(timer);
+		var queue=this.queue;
+		var len=queue.length;
+		var search=this.search;
+		console.log(search);
+
+		
+		var i=0;
+		
+		timer=setInterval(function(){
+
+			if (i<queue.length) {
+				//if(!findClass(queue[i],"open")){
+					queue[i].style.display="flex";
+					if(i > 0){
+						queue[i].parentNode.querySelector('span').className = 'tag-unfold';
+						queue[i].parentNode.className = addClass(queue[i].parentNode,"open");
+					}
+				//}
+
+				if(search.indexOf(queue[i])>=0){
+
+					/*if(!findClass(queue[i],"open")){
+						queue[i].style.display="flex";
+						queue[i].parentNode.querySelector('span').className = 'tag-unfold';
+						queue[i].parentNode.className=addClass(queue[i],"open");
+					}*/
+					console.log("red");
+					queue[i].style.color="red";
+					clearInterval(timer);		
+				}
+				i++;
+			}else{
+				clearInterval(timer);		
+			}
+	
+		},500)
+		
+	}
+
+	/**
+	 * 添加树的节点
+	 * @param {节点元素} node  需要添加节点的父元素
+	 * @param {String} value 添加的节点的值
+	 */	
+	Tree.prototype.addTree=function(node,value){
+		console.log(node);
+		var div=document.createElement("div");
+		var parentClass=node.className;
+		console.log(parentClass);
+		
+		div.innerHTML='<p class="line"><span class="tag"></span>' + value;
+		console.log(parentClass.charCodeAt(0));
+		div.className=String.fromCharCode(parentClass.charCodeAt(0)+1);
+		node.appendChild(div);
+		/*node.className = 'open';*/
+		node.style.display = 'flex';
+	}
+
+	/**
+	 * 删除树的节点及其子节点
+	 * @param  {节点元素} node 需要删除的节点
+	 */
+	Tree.prototype.deleteTree=function(node){
+		var parent=node.parentNode;
+		parent.removeChild(node);
+	}
+	/**
+	 * 初始化函数 主要实现元素事件的绑定
+	 * 
+	 */
+	function init(){
+	
+		var tree=new Tree();
+
+		
+		var navB=document.getElementsByTagName("nav");
+		navB[0].onclick=function(e){
+			
+			var target=e.target;
+			if(target.getAttribute("type")=="button"){
+			
+				var classN=target.className;
+				
+				switch (classN){
+					case "deep" : {tree.queue=[];tree.deep(tree.root);}break;
+					case "spread" : {tree.queue=[];tree.spread(tree.root);}break;
+					
+				}
+				tree.show();
+				
+			}
+		}
+		/**
+		 * 查询按钮绑定事件
+		 * @return 查询的结果 对查询的结果添加背景
+		 */
+		document.getElementById("searchButton").onclick=function(){
+
+			tree.queue=[];
+			
+			tree.spread(tree.root);
+			tree.searchF();
+			tree.show();
+		}
+
+		/**
+		 * 树的根结点绑定事件 当点击树的元素时 选中节点背景发生变化 当点击添加按钮时 节点添加子元素 点击删除按钮时 删除当前节点及其子节点
+		 */
+		tree.root.onclick=function(e){
+			this.style.backgroundColor="#fff";
+			var div=this.querySelectorAll(" div");
+			for (var i = 0; i < div.length; i++) {
+				div[i].style.backgroundColor="#fff";
+			}
+			var target=e.target;
+			while(target){
+				if(target.tagName.toLowerCase() != 'div') {
+					target = target.parentNode;
+				} else {
+					break;
+				}
+
+			}
+			//console.log(target);
+			
+
+			tree.toggleTree(target);
+
+			var addButton=document.querySelector(".add-button");
+			addButton.onclick=function(){
+				var addValue=document.querySelector(".text-add").value;
+				if(addValue){
+					tree.addTree(target,addValue);
+				}else{
+					alert("请输入插入节点的内容");
+				}
+			}
+
+			var deleteButton=document.querySelector(".delete-button");
+			deleteButton.onclick=function(){
+				tree.deleteTree(target);
+			}
+
+		}
+	}
+
+	init();
+
+function findClass(node,classN){
+	var flag=false;
+	
+	var classL=node.className.split(/\s+/);
+	console.log(classL);
+	for(var i=0,len=classL.length;i<len;i++){
+		
+		if(classL[i]==classN){
+			flag=true;
+			break;
+		}
+	}
+	return flag;
+}
+
+function deleteClass(node,classN){
+	
+	var classL=node.className.split(/\s+/);
+	var pos=-1;
+	
+	var len=0;
+	for (var i = 0; i < len; i++) {
+		if(classL[i]==classN){
+			pos=i;
+			break;
+		}
+	}
+
+	classL.splice(pos,1);
+	classL=classL.join(" ");
+	return classL;
+}
+
+function addClass(node,classN){
+	var classL=node.className.split(/\s+/);
+	if(classL.indexOf(classN)<0){
+		classL.push(classN);
+	}
+	 
+	 classL=classL.join(" ");
+	return classL;
+}
+
+	</script>
+	</body>
+	</html>	

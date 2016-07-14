@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	.container{
+		border: 1px solid #ccc;
+		margin-left:auto;
+		margin-right:auto;
+		padding:10px;
+		width:100%;
+		box-sizing: border-box;
+	}
+	.row{
+		margin:0;
+		overflow:hidden;
+		border:1px solid black;
+	}
+	.col{
+		border:1px solid #999;
+		float:left;
+		height:50px;
+		background-color: #eee;
+	}
+	[class*="col-"]{
+		box-sizing:border-box;
+		float:left;
+		padding:10px;
+	}
+	.col-md-6{
+		width:50%;
+	}
+	@media(min-width:769px){
+	
+	.col-sm-1{
+		width:8.3333%;
+	}
+	.col-sm-2{
+		width:16.6667%;
+	}
+	.col-sm-3{
+		width:25%;
+	}
+	.col-sm-4{
+		width:33.3333%;
+	}
+	.col-sm-5{
+		width:41.6667%;
+	}
+	.col-sm-6{
+		width:50%;
+	}
+	.col-sm-8{
+		width:66.6667%;
+	}
+	.col-sm-12{
+		width:100%;
+	}
+	}
+	@media(max-width:768px){
+	.col-md-12{
+		width:100%;
+	}
+	.col-md-3{
+		width:25%;
+	}
+	.col-md-6{
+		width:50%;
+	}
+	.col-md-2{
+		width:16.6667%;
+	}
+	.col-md-8{
+		width:66.6667%;
+	}
+	}
+	
+	
+	</style>
+</head>
+<body>
+	<div class="container">
+	<div class="row">
+		<div class="col col-sm-4 col-md-6">四栏</div>
+		<div class="col col-sm-4 col-md-6">四栏</div>
+		<div class="col col-sm-4 col-md-12">四栏</div>
+	</div>
+	<div class="row">
+		<div class="col col-sm-3 col-md-3">三栏</div>
+		<div class="col col-sm-3 col-md-6">三栏</div>
+		<div class="col col-sm-6 col-md-3">六栏</div>
+	</div>
+	<div class="row">
+		<div class="col col-sm-1 col-md-2">一栏</div>
+		<div class="col col-sm-1 col-md-2">一栏</div>
+		<div class="col col-sm-2 col-md-8">两栏</div>
+		<div class="col col-sm-2 col-md-3">两栏</div>
+		<div class="col col-sm-6 col-md-3">六栏</div>
+	</div>	
+	</div>
+</body>
+</html>

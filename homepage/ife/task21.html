@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现表单自动生成工厂</title>
+	<style type="text/css">
+		body{
+			font-size:14px;
+			font-family: '微软雅黑'
+		}
+		.cont{
+			vertical-align: top;
+		}
+		#setting{
+			width:340px;
+			float:left;
+		}
+		section{
+			border:1px solid black;
+			border-radius: 10px;
+
+			width:700px;
+			display: inline-block;
+		}
+		fieldset{
+			width:300px;
+			margin-bottom: 10px;
+		}
+		.line{
+			margin:5px;
+		}
+
+		label{
+			display: inline-block;
+			padding-right: 5px;
+			width:80px;
+			text-align: right;
+
+		}
+		input[type="number"]{
+			width:40px;
+		}
+		.add{
+			background-color: #15A7E9;
+			padding:10px 20px;
+			outline: none;
+			border:none;
+			border-radius: 5px;
+		}
+
+		#form-show{
+			width:500px;
+		}
+		#rules,#limit,#select{
+			display: none;
+		}
+		#tag-cont{
+			margin: 5px;
+		}
+		#tag-cont span{
+			padding:10px;
+			display: inline-block;
+			background-color: #1BC458;
+			border-radius:5px;
+			margin-left: 5px;
+		}
+
+		#tag-cont span:hover{
+			opacity:.6;
+		}
+
+		.pass-level{
+			width:35px;
+			height:8px;
+			font-size:12px;
+			display: inline-block;
+			margin-left:5px;
+			background-color: #CCCCCC;
+		}
+		.level{
+			display: none;
+		}
+		.item{
+			padding:5px;
+		}
+		.item span{
+			margin-left: 5px;
+			color:#DCDADA;
+		}
+
+	</style>
+</head>
+<body>
+<div class='cont'>
+<form id='setting'>
+	<fieldset id='form-type'>
+	<legend>类型</legend>
+		<input type="radio" name="type" value='text'>文本框
+		<input type="radio" name="type" value='radio'>单选框
+		<input type="radio" name="type" value='checkbox'>多选框
+		<input type="radio" name="type" value='select'>选择框
+		<input type="radio" name="type" value="textbox">文本域
+		<input type="radio" name="type" value="password">密码
+		<input type="radio" name="type" value="button">按钮
+
+	</fieldset >
+
+	<fieldset id = 'basic'>
+	<legend>基本配置</legend>
+		<div class='line'><label>标签名：</label><input type="text" name="label"></div>
+		<div class='line'><label>name：</label><input type="text" name="name"></div>
+		
+	</fieldset>
+
+	<fieldset id = 'rules'>
+	<legend>规则</legend>
+		
+		<input type="radio" name="rules" value='email'>邮箱
+		<input type="radio" name="rules" value='user'>用户名
+		<input type="radio" name="rules" value='phone'>电话号码
+		<div class='line'><label>规则提示：</label><input type="text" name="rules_tip"></div>
+		<div class="line"><label>通过提示：</label><input type="text" name="rule_succ"></div>
+		<div class="line"><label>失败提示：</label><input type="text" name="rule_fail"></div>
+	</fieldset>
+
+	<fieldset id='limit'>
+	<legend>长度限制</legend>
+		<label>字符范围：</label><input type="number" name="min" value='4'><span>--</span><input type="number" name="max" value="16">
+	</fieldset>
+
+	<fieldset id='select'>
+	<legend>选项设置</legend>
+	<input type="text" name="section" placeholder="选项以回车 空格隔开" id="tagvalue">
+	<div id = 'tag-cont'></div>
+		
+	</fieldset>
+	<button class='add' id='add'>创建表单元素</button>
+</form>
+<section>
+	<h2>表单展示区</h2>
+	<form id = 'form-show'></form>
+</section>
+<script type="text/javascript" src='script/task21-script.js'></script>
+<script type="text/javascript" src='script/task21-tag.js'></script>
+<script type="text/javascript" src='task21/task21-createForm.js'></script>
+<script type="text/javascript">
+var setting = document.getElementById('setting');
+var add = document.getElementById('add');
+
+//左侧配置的显示
+var formType = document.getElementById('form-type');
+
+var result ={}
+
+formType.onclick = function(e){
+	show(e);
+}
+//左侧选项操作
+var tag = new Tag();
+console.log(tag);
+tag.init();
+
+
+
+//点击操作
+add.onclick = function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	//获取用户输入的内容
+	result = GetData(setting);
+	console.log(result);
+	var create = new CreateForm(result);
+	create.init(result);
+}
+
+
+</script>
+</div>
+</body>
+</html>

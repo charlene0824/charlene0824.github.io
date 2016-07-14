@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task12</title>
+	<style type="text/css">
+	#container{
+		margin-top: 10px;
+	}
+	#num{
+		width:250px;
+		height:50px;
+	}
+	span{
+		text-align: center;
+		display: inline-block; 
+		padding:15px;
+		color: #838458;
+		font: 14px "微软雅黑";
+		border:1px solid #eee;
+		background-color: #5DF098;
+		margin-left:10px;
+		line-height: 30px;
+		color:#fff;
+		border-radius:5px;
+	}
+	label{
+		width:150px;
+		height:30px;
+		line-height:30px;
+		display:inline-block;
+		text-align:right;
+		vertical-align:top;
+	}
+	#button{
+		display: inline-block;
+		vertical-align:top;
+		
+	}
+	@keyframes ident{
+		0% {
+			transform-origin:;
+			transform:rotate(0);
+		}
+		100% {
+			transform:rotate(360deg);
+		}
+	}
+	.span-rotate{
+	
+		animation-name:ident;
+		animation-duration:1s;
+		-webkit-animation-name:ident;
+		-webkit-animation-duration: 1s;
+	}
+	button{
+		padding:10px 15px;
+		background-color:#6DC571;
+		border:none;
+		outline:none;
+		vertical-align:top;
+
+
+	}
+	button:hover{
+		opacity:.6;
+	}
+	.sub-wrap{
+		margin-bottom: 10px;
+	}
+	#query{
+		width:250px;
+		height:30px;
+	}
+	</style>
+</head>
+<body>
+<div class='sub-wrap'>
+	<label>请输入内容：</label><textarea type="text" name="num" id="num" placeholder="可以为数字、中文、英文等，可以通过用回车，逗号，顿号，空格等符号作为不同内容的间隔"></textarea>
+	<div id="button">
+	<button id="left-in">左侧入</button>
+	<button id="left-out">左侧出</button>
+	<button id="right-in">右侧入</button>
+	<button id="right-out">右侧出</button>
+	</div>
+	</div>
+	<div class='sub-wrap'><label>请输入查询的内容：</label><input type="text" id="query"></input>	<button id="querySubmit">查询</button></div>
+
+	
+	<div  id="container"></div>
+	<script type="text/javascript">
+		var button=document.getElementById("button");
+		var container=document.getElementById("container");
+		var num=document.getElementById("num");
+		var queue=[];
+
+		var span = container.getElementsByTagName("span");
+
+		var query=document.getElementById("query");
+		var queryS=document.getElementById("querySubmit");
+
+
+		//实现查询操作 当数组中的值满足查询内容时 将满足条件的内容字体颜色改为其他色
+		queryS.onclick=function(e){
+			e.cancelBubble = true;
+
+			var queryV = query.value;
+
+			var reg = new RegExp(queryV,"g");
+			
+			var match = null;
+
+			for (var i = 0; i < span.length; i++) {
+				
+				//匹配字母 为什么不能加载到div中
+				match = span[i].innerHTML.match(reg);
+				console.log(match);
+				if(match){
+					span[i].className = 'span-rotate';
+					span[i].innerHTML=span[i].innerHTML.replace(reg,"<em style='color:#F6537E;font-style:normal'>"+"$&"+"</em>");
+					console.log(span[i]);
+				}
+			}
+			console.log(container);
+		}
+
+		button.onclick=function(e){
+
+			var res=checkText();//取得数组
+			
+			var target=e.target;
+			var idVal=target.getAttribute("id");
+
+			for (var i = 0; i < res.length; i++) {
+				
+				switch (idVal){
+					case "left-in": queue.unshift(res[i]);break;
+					case "left-out": queue.shift();break;
+					case "right-in": queue.push(res[i]);break;
+					case "right-out": queue.pop();break;
+				}			
+			
+			}
+			queue=delRepeat(queue);
+
+			showQueue();			
+			query.value = '';
+		}
+
+		//将输入的字符串转换为数组
+		function checkText(){
+			var value=num.value;
+			//console.log(value);
+			//用户输入空格、逗号和回车是，都自动把当前输入的内容作为一个tag放在输入框下面
+			var result=value.trim().split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/);
+			//console.log(result);
+			if(result.length>10){
+				//console.log("true");
+				result=result.slice(result.length-10);
+				//console.log(result);
+			}
+			for (var i = 0; i < result.length; i++) {
+				result[i]=result[i].trim();
+			}
+			return result;
+		}
+
+		//数组去重
+		function delRepeat(arr){
+			var res=[];
+			var json={};
+			//console.log(arr.length);
+			for(var i=0;i<arr.length;i++){
+				if(!json[arr[i]]){
+					res.push(arr[i]);
+					json[arr[i]]=1;
+
+				}
+				
+			}
+			
+			return res;
+		}
+
+
+		//数组展示
+		function showQueue(){
+		
+			container.innerHTML="";
+			var fragment=document.createDocumentFragment();
+			if(queue.length<60){
+				for (var k = 0; k < queue.length; k++) {
+					var span=document.createElement("span");
+					span.innerHTML=queue[k];
+					// span.style.height=queue[k]+"px";
+					fragment.appendChild(span);
+					//console.log("span");
+				}
+				container.appendChild(fragment);
+			}else{
+				alert("数组数量已达上限");
+			}
+			
+			
+		}
+
+		//span的点击事件
+		container.onclick=function(e){
+			var target=e.target;
+			if(target.tagName.toLowerCase()=="span"){
+				var str=target.innerHTML;
+				queue.splice(queue.indexOf(str),1);
+				showQueue();
+			}
+		}
+
+	</script>
+</body>
+</html>

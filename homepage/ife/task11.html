@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task18</title>
+	<style type="text/css">
+	#cont{
+		margin-top: 10px;
+	}
+	span{
+		text-align: center;
+		display: inline-block; 
+		/*padding:10px;*/
+		color: #838458;
+		font: 14px "微软雅黑";
+		border:1px solid #eee;
+		/*background-color: red;*/
+		margin-left:10px;
+
+	}
+	</style>
+</head>
+<body>
+	<input type="text" name="num" id="num"></input>
+	<button id="left-in">左侧入</button>
+	<button id="left-out">左侧出</button>
+	<button id="right-in">右侧入</button>
+	<button id="right-out">右侧出</button>
+	<button id="sort">排序</button>
+	<div id="cont"></div>
+	<script type="text/javascript">
+		var leftIn=document.getElementById("left-in");
+		var leftOut=document.getElementById("left-out");
+		var rightIn=document.getElementById("right-in");
+		var rightOut=document.getElementById("right-out");
+		var cont=document.getElementById("cont");
+		var num=document.getElementById("num");
+		var sort=document.getElementById("sort");
+		var queue=[];
+		var reg = /^[0-9]{2}$/;
+
+		leftIn.onclick=function(){
+			var value=num.value;
+			
+			if(reg.test(value.trim())){
+				queue.unshift(num.value);
+			}else{
+				alert("输入的值必须为数字");
+			}
+			showQueue();
+		}
+			
+		leftOut.onclick=function(){
+			var span=cont.getElementsByTagName("span");
+			if(span.length){
+				var item=queue.shift();
+				alert(item);
+			}else{
+				alert("队列中已没有值");
+			}
+			showQueue();
+		}
+		rightIn.onclick=function(){
+			var value=num.value;
+			
+			if(reg.test(value.trim())){
+				queue.push(num.value);
+			}else{
+				alert("输入的值必须为数字");
+			}
+			showQueue();
+		}
+		rightOut.onclick=function(){
+			var span=cont.getElementsByTagName("span");
+			if(span.length){
+				var item=queue.pop();
+				alert(item);
+				
+			}else{
+				alert("队列中已没有值");
+			}
+			showQueue();
+		}
+		function init(){
+			for(var i=0;i<40;i++){
+				queue[i]=Math.floor(Math.random()*90+10);
+			}
+			showQueue();
+		}
+
+		function showQueue(){
+			cont.innerHTML="";
+			var fragment=document.createDocumentFragment();
+			if(queue.length<60){
+				for (var k = 0; k < queue.length; k++) {
+					var span=document.createElement("span");
+					span.innerHTML=queue[k];
+					span.style.height=queue[k]+"px";
+					fragment.appendChild(span);
+					console.log("span");
+				}
+				cont.appendChild(fragment);
+			}else{
+				alert("数组数量已达上限");
+			}
+			
+			
+		}
+		sort.onclick=function(){
+
+			sortB();
+		}
+		function sortB(){
+			console.log("sortB");
+			var span=document.getElementsByTagName("span");
+			for (var i = 0; i < queue.length; i++) {
+				for(var j=0;j<queue.length-i-1;j++){
+					// sleep();
+					span[j].style.background="#65D555";
+					if(queue[j]>queue[j+1]){
+						var temp=queue[j];
+						queue[j]=queue[j+1];
+						queue[j+1]=temp;
+					}
+					
+				}
+				showQueue();
+				
+			}
+		}
+
+		init();
+	</script>
+</body>
+</html>

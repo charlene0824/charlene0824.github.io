@@ -1,0 +1,185 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+    <style type="text/css">
+    section{
+      vertical-align:top;
+      width:700px;
+      margin:0 auto;
+    }
+      .label-name{
+        display:inline-block;
+        width:120px;
+        height:50px;
+        line-height:50px;
+        text-align:right;
+      }
+      .wrap{
+        display:inline-block;
+        vertical-align:top;
+      }
+      ul{
+        display:inline-block;
+        width:300px;
+        vertical-align:top;
+      }
+      table{
+        display:inline-block;
+      }
+    </style>
+  </head>
+<body>
+<section>
+  <div class='wrap'>
+
+    <label class='label-name'>城市名称：</label><input id="aqi-city-input" type="text"><br>
+    <label class='label-name'>空气质量指数：</label><input id="aqi-value-input" type="text"><br>
+    <button id="add-btn">确认添加</button></br>
+    <table id="aqi-table">
+  <!-- 
+    <tr>
+      <td>城市</td><td>空气质量</td><td>操作</td>
+    </tr>
+    <tr>
+      <td>北京</td><td>90</td><td><button>删除</button></td>
+    </tr>
+    <tr>
+      <td>北京</td><td>90</td><td><button>删除</button></td>
+    </tr>
+   -->
+  </table>
+  </div>
+  <ul>
+    
+    <li>用户输入城市名称和空气质量指数后，点击“确认添加”按钮后，就会将用户的输入在进行验证后，添加到下面的表格中，新增一行进行显示</li>
+    <li>用户输入的城市名必须为中英文字符，空气质量指数必须为整数</li>
+    <li>
+    用户输入的城市名字和空气质量指数需要进行前后去空格及空字符处理（trim）</li>
+    <li>用户输入不合规格时，需要给出提示（允许用alert，也可以自行定义提示方式）</li>
+    <li>用户可以点击表格列中的“删除”按钮，删掉那一行的数据</li>
+
+  </ul>
+ 
+  
+   </section>
+<script type="text/javascript">
+  /* 用户输入的城市名必须为中英文字符，空气质量指数必须为整数
+  用户输入的城市名字和空气质量指数需要进行前后去空格及空字符处理（trim）
+  用户输入不合规格时，需要给出提示（允许用alert，也可以自行定义提示方式）
+  用户可以点击表格列中的“删除”按钮，删掉那一行的数据*/
+
+
+  /**
+ * aqiData，存储用户输入的空气指数数据
+ * 示例格式：
+ * aqiData = {
+ *    "北京": 90,
+ *    "上海": 40
+ * };
+ */
+var aqiData = {};
+var isadd=false;
+var aqiCityInput=document.getElementById("aqi-city-input");
+var aqiValueInput=document.getElementById("aqi-value-input");
+/**
+ * 从用户输入中获取数据，向aqiData中增加一条数据
+ * 然后渲染aqi-list列表，增加新增的数据
+ */
+function addAqiData() {
+  var cityValue=aqiCityInput.value.trim();
+  var cityReg=/^[\u4e00-\u9fa5a-zA-z]+$/;
+  var valueB=aqiValueInput.value.trim();
+  var numReg=/^[0-9]+$/;
+  if(!cityValue){
+    isadd=false;
+    alert("请输入城市名称");
+  }else{
+    if(!cityReg.test(cityValue)){
+      isadd=false;
+      alert("城市名称必须是中英文字符");
+      cityValue="";
+    }else{
+    isadd=true;
+    }
+  }
+ 
+ 
+  if(!valueB){
+    isadd=false;
+    alert("请输入指标值");
+
+  }else{
+    if(!numReg.test(valueB)){
+      isadd=false;
+      alert("指数值必须是数字");
+      valueB="";
+    }
+    else{
+      isadd=true;
+    }
+  }
+  if(isadd){
+    aqiData[cityValue]=valueB;
+  }
+  
+  return aqiData;
+}
+
+/**
+ * 渲染aqi-table表格
+ */
+function renderAqiList(aqiData) {
+  if(!!aqiData){
+    var table=document.getElementById("aqi-table");
+    var item="<thead><td>城市</td><td>空气指数</td><td>操作</td></thead>"
+    for(city in aqiData){
+      item+="<tr><td>"+city+"</td><td>"+aqiData[city]+"</td><td><button >删除</button></td></tr>"
+    }
+    table.innerHTML=item;
+  }
+
+}
+
+/**
+ * 点击add-btn时的处理逻辑
+ * 获取用户输入，更新数据，并进行页面呈现的更新
+ */
+function addBtnHandle() {
+  var aqiData=addAqiData();
+  renderAqiList(aqiData);
+  aqiCityInput.value="";
+  aqiValueInput.value="";
+}
+
+/**
+ * 点击各个删除按钮的时候的处理逻辑
+ * 获取哪个城市数据被删，删除数据，更新表格显示
+ */
+function delBtnHandle(aqiData) {
+  // do sth.
+  var city=this.parentNode.parentNode.firstChild.innerHTML;
+  delete aqiData[city];
+  renderAqiList(aqiData);
+}
+
+function init() {
+  // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
+  var addBtn=document.getElementById("add-btn");
+  addBtn.onclick=function(){
+      addBtnHandle();
+  }
+  // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
+  var table=document.getElementById("aqi-table");
+  table.onclick=function(e){
+    if(e.target.tagName.toLowerCase()=="button"){
+      delBtnHandle.call(e.target,aqiData);
+    }
+  }
+}
+
+init();
+</script> 
+</body>
+</html>

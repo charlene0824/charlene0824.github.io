@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task13</title>
+	<style type="text/css">
+	.left,.right{
+		width:400px;
+		display:inline-block;
+		vertical-align:top;
+	}
+
+	#hobby-cont,#tag-cont{
+		margin: 10px;
+	}
+	span{
+
+		text-align: center;
+		display: inline-block; 
+		padding:10px;
+		color: #838458;
+		font: 14px "微软雅黑";
+		background-color: #D75060;
+		opacity: .6;
+		margin-left:10px;
+		line-height: 20px;
+		color:#fff;
+		border-radius: 5px;
+	}
+	#button{
+		display: inline-block;
+	}
+	#hobby{
+		width:300px;
+		height:100px;
+	}
+	#addHobby{
+		display:inline-block;
+		background-color:#F78484;
+		border:none;
+		outline:none;
+		padding:10px 15px;
+		color:#fff;
+
+	}
+	</style>
+</head>
+<body>
+<div class='left'>
+	<label>Tags：</label><input type="text" id="tag"></input>
+	<div  id="tag-cont"></div>
+	<p>请输入兴趣爱好：</p>
+	<textarea type="text" name="num" id="hobby"></textarea>
+	<button id="addHobby">添加兴趣爱好</button>
+	<div id="hobby-cont"></div>
+</div>
+<div class='right'>
+<p>实现一个tag输入框 </p>
+<ul>	
+  <li>要求遇到用户输入空格，逗号，回车时，都自动把当前输入的内容作为一个tag放在输入框下面。</li>
+  <li> Tag不能有重复的，遇到重复输入的Tag，自动忽视。</li> 
+  <li>每个Tag请做trim处理</li>
+  <li> 最多允许10个Tag，多于10个时，按照录入的先后顺序，把最前面的删掉</li> 
+  <li>当鼠标悬停在tag上时，tag前增加删除二字，点击tag可删除</li>
+</ul>
+<p>实现一个兴趣爱好输入的功能</p>
+<ul>
+  <li>通过一个Textarea进行兴趣爱好的输入，可以通过用回车，逗号，顿号，空格等符号作为间隔。</li>
+  <li>当点击“确认兴趣爱好”的按钮时，将textarea中的输入按照你设定的间隔符，拆解成一个个的爱好，显示在textarea下方</li>
+  <li>爱好不能重复，所以在下方呈现前，需要做一个去重</li>
+  <li>每个爱好内容需要做trim处理</li>
+  <li>最多允许10个兴趣爱好，多于10个时，按照录入的先后顺序，把最前面的删掉</li>
+</ul>
+</div>
+	<script type="text/javascript">
+		var tag=document.getElementById("tag");
+		var tagCont=document.getElementById("tag-cont");
+		var hobby=document.getElementById("hobby");
+		var addHobby=document.getElementById("addHobby");
+		var hobbyCont=document.getElementById("hobby-cont");
+
+/*
+*初始化函数 主要定义需要监听的事件
+*/
+		function init(){
+			var newtag=new Tags();
+			var newhobby=new Tags();
+			tag.onkeydown=function(e){
+				if(e.keyCode==32 || e.keyCode==13){
+					var value=tag.value;
+					newtag.addTag(value);
+					tag.value="";
+					tagCont.innerHTML = '';
+						var fragment=newtag.show();
+						tagCont.appendChild(fragment)
+					
+				}
+				console.log(e.keyCode);
+			}
+			tagCont.onmouseover = mouseoverFunc
+			tagCont.onmouseout = mouseoutFunc;
+
+			function mouseoverFunc(e){
+				var target = e.target;
+				if(target.tagName.toLowerCase()=='span'){
+					target.innerHTML = '删除'+target.innerHTML;
+					target.style.backgroundColor = 'red';
+				}
+			}
+			function mouseoutFunc(e){
+				var target = e.target;
+				if(target.tagName.toLowerCase()=='span'){
+					target.innerHTML =target.innerHTML.slice(2);
+					target.style.backgroundColor = '#D75060';
+				}
+
+			}
+			tagCont.onclick=function(e){
+				var target=e.target;
+				if(target.tagName.toLowerCase()=="span"){
+						newtag.delete(target.innerHTML);
+						tagCont.innerHTML="";
+						var fragment=newtag.show();
+						tagCont.appendChild(fragment)
+				}
+			}
+
+			addHobby.onclick=function(){
+				console.log("addHobby");
+				var value=hobby.value;
+
+				newhobby.addTags(value);
+				hobby.value="";
+				hobbyCont.innerHTML = '';
+				var fragment=newhobby.show();
+				hobbyCont.appendChild(fragment);
+
+			}
+			hobbyCont.onmouseover = mouseoverFunc;
+			hobbyCont.onmouseout = mouseoutFunc;
+			hobbyCont.onclick=function(e){
+				var target=e.target;
+				if(target.tagName.toLowerCase()=="span"){
+						newhobby.delete(target.innerHTML);
+						hobbyCont.innerHTML = '';
+						console.log(newhobby.queue);
+						var fragment = newhobby.show();
+						hobbyCont.appendChild(fragment)
+				}
+			}
+
+		}
+
+		//定义一个tags类
+		function Tags(){
+			
+			this.queue=[];
+		}
+		//删除一个标签
+		Tags.prototype.delete=function(val){
+			
+			
+			this.queue.splice(this.queue.indexOf(val.slice(2)),1);
+		}
+
+		//增加一个标签
+		Tags.prototype.addTag=function(value){
+			
+			this.queue.unshift(value.trim());
+			this.queue=delRepeat(this.queue);
+		}
+		//增加多个标签
+		Tags.prototype.addTags=function(value){
+			//用户输入空格、逗号和回车时，都自动把当前输入的内容作为一个tag放在输入框下面
+			var result=value.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/);
+			console.log(result);
+			
+			if(result.length>10){
+				
+				result=result.slice(result.length-10);
+				
+			}
+			for (var i = 0; i < result.length; i++) {
+				result[i]=result[i].trim();
+				if(result[i]){
+					this.queue.unshift(result[i]);
+				}
+				
+			
+			}
+			this.queue=delRepeat(this.queue);
+		}
+
+	//显示标签或爱好
+		Tags.prototype.show = function(){
+			
+			console.log(this.queue);
+			var fragment=document.createDocumentFragment();
+			
+				for (var k = 0; k < this.queue.length; k++) {
+					var span=document.createElement("span");
+					span.innerHTML=this.queue[k];
+					
+					fragment.appendChild(span);
+					
+					
+				}
+				return fragment;
+				
+			
+		}
+
+		//数组去重
+		function delRepeat(arr){
+			var res=[];
+			var json={};
+			//console.log(arr.length);
+			for(var i=0;i<arr.length;i++){
+				if(!json[arr[i]]){
+					res.push(arr[i]);
+					json[arr[i]]=1;
+
+				}
+				
+			}
+			
+			return res;
+		}
+
+		
+		init();
+
+	</script>
+</body>
+</html>
