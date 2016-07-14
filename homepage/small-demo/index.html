@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>小DEMO</title>
+	<style type="text/css">
+	.demo-wrap{
+		text-align:center;
+	}
+		.demo-cont{
+			padding:20px 20px;
+			background-color:#35DFA6;
+			opacity:.3;
+			border-radius:20px;
+			text-align:center;
+			vertical-align:middle;
+			display:inline-block;
+			margin:10px;
+			cursor:pointer;
+		}
+		
+		.demo-a{
+			display:inline-block;
+			color:#fff;
+			text-decoration:none;
+
+		}
+
+
+	</style>
+</head>
+<body>
+<div class='demo-wrap'>
+
+	<a href="#/demo/waterfall" class='demo-a'><div class='demo-cont'>瀑布流布局</div></a>
+
+	<a href="#/demo/dragqq" class='demo-a'><div class='demo-cont'>拖放</div></a>
+	<a href="#/demo/streach" class='demo-a'><div class='demo-cont'>手风琴</div></a>
+	<a href="#/demo/tab" class='demo-a'><div class='demo-cont'>tab选项卡</div></a>
+	<a href="#/demo/buju" class='demo-a'><div class='demo-cont'>自适应布局</div></a>
+
+<script type="text/javascript">
+	document.querySelector('.demo-wrap').onmouseover = function(e){
+		if(e.target.getAttribute('class') == 'demo-cont'){
+			e.target.style.cssText = "transition:opacity 1s;		opacity:1;"
+		}
+	}
+	document.querySelector('.demo-wrap').onmouseout = function(e){
+		if(e.target.getAttribute('class') == 'demo-cont'){
+			e.target.style.cssText = "transition:opacity 1s;		opacity:.3;"
+		}
+	}
+</script>
+</div>
+</body>
+</html>

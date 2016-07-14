@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style type="text/css">
+#div1, #div2
+{float:left; width:300px; height:300px; margin:10px;padding:10px;border:1px solid #aaaaaa;}
+</style>
+<script type="text/javascript">
+function drag(event){
+event.dataTransfer.setData("Text",event.target.id);
+}
+function allowDrop(event){
+event.preventDefault();
+}
+function drop(event){
+event.preventDefault();
+
+var data=event.dataTransfer.getData("Text");
+event.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+<body>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <img src="../img/tx1.jpg" draggable="true" ondragstart="drag(event)" id="drag1" />
+  <p id="p1" ondrop="drop(event)" ondragover="allowDrop(event)">javascript</p>
+</div>
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+</body>
+</html>

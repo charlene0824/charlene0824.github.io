@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>抽奖</title>
+	<style type="text/css">
+	#container{
+		border:1px solid #9C9696;
+		margin:0 auto;
+		width:300px;
+		height:180px;
+		text-align: center;
+	}
+	
+	</style>
+</head>
+<body>
+	<div id="container">
+		<span id="title">抽奖</span>
+		<div>
+			<input type="button" value="start">
+			<input type="button" value="stop">
+		</div>
+	</div>
+	<script type="text/javascript">
+	var item=new Array("苹果","惠普","水杯","铅笔","电脑");
+	var container=document.getElementById("container");
+	var button=container.getElementsByTagName("input");
+	var title=document.getElementById("title");
+	var timer=null;
+	var flag=true;
+	button[0].onclick=function(){
+
+		if(flag==true){
+			flag=false;
+			timer=setInterval(function(){
+				var i=Math.floor(Math.random()*item.length);
+				title.innerHTML=item[i];
+			},50);
+		}
+
+	}
+			
+	button[1].onclick=function(){
+		clearInterval(timer);
+		flag=true;
+	}
+
+	</script>
+</body>
+</html>

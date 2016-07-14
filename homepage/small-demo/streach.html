@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>手风琴效果</title>
+	<style type="text/css">
+    *{margin:0;
+     padding:0;
+
+     list-style:none;}
+
+.menu{width:210px;
+      margin:50px auto;
+      font-size:14px;
+      border:1px solid #ccc;}
+
+.menu p{height:25px;
+        line-height:25px;
+        font-weight:bold;
+        background:#eee;
+        border-bottom:1px solid #ccc;
+        cursor:pointer;
+        padding-left:5px;}
+
+.menu div ul{display:none;}
+
+.menu li{height:24px;
+         line-height:24px;
+         padding-left:5px;}
+</style>
+
+</head>
+<body>
+	<div class="menu" id="menu">
+		<div>
+			<p>Web前端</p>
+			<ul style="display:block">
+				<li>JavaScript</li>
+				<li>DIV+CSS</li>
+				<li>jQuery</li>
+			</ul>
+		</div>
+		<div>
+			<p>后台脚本</p>
+			<ul>
+				<li>PHP</li>
+				<li>ASP.net</li>
+				<li>JSP</li>
+			</ul>
+		</div>
+		<div>
+			<p>前端框架</p>
+			<ul>
+				<li>Extjs</li>
+				<li>Esspress</li>
+				<li>YUI</li>
+			</ul>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript">
+
+		
+      // 将所有点击的标题和要显示隐藏的列表取出来
+      var p=document.getElementsByTagName("p");
+      var ul=document.getElementsByTagName("ul");
+      
+     for(var i=0;i<p.length;i++){
+         p[i].id=i;
+         p[i].onclick=function(){
+         		for(var j=0;j<p.length;j++){
+         			ul[j].style.display="none";
+                 
+         		}
+         		ul[this.id].style.display="block";
+             }
+         }
+   
+	</script>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab选项卡</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+		list-style:none;
+	
+	}
+	.notice{
+
+		width:306px;
+		font-size:14px;
+		height:98px;
+		margin:0 auto;
+		border:3px solid #eee;
+		overflow:hidden;
+	}
+	.notice-tit{
+		height:27px ;
+		/*position:relative/
+		background:#f7f7f7;*/
+	}
+	.notice-tit ul{
+		/*position:absolute;*/
+		/*ul的宽度大于等于父div的宽度加上li的边框乘以2即可*/
+		width:310px;
+		margin-left:-2px;/* 向左缩进li边框的宽度 */
+	}
+	.notice-tit ul li{
+		float:left;
+		/*（li的宽度+padding的宽度*2）*li的个数=ul的最小宽度*/
+		width:58px;
+		/*height:26px;*/
+		padding:0 2px;
+		line-height:26px;
+		text-align:center;
+		overflow:hidden;
+		background:#eee;
+		border-bottom:1px silid #eee;
+	}
+	.notice li a:link,.notice-tit li a:visited{
+		text-decoration: none;
+		color:#000;
+
+	}
+	.notice li a:hover{
+		color:#f90;
+	}
+	.notice li.select{
+		background:#fff;
+		border-bottom:1px solid #fff;
+		border-left:2px solid #eee;
+		border-right:2px solid #eee;
+		padding:0;/*将padding的值置为0，同时增加左边框和右边框的值*/
+		font-weight:bolder;
+	}
+
+	.notice-con .mod{
+		margin:10px 10px 10px 20px ;
+
+	}
+	.notice-con .mod ul li{
+		float:left;
+		width:138px;
+		line-height:25px;
+		overflow:hidden;
+	}
+	</style>
+</head>
+<body>
+	<div id="notice" class="notice">
+		<div id="notice-tit" class="notice-tit">
+			<ul>
+				<li>
+					<a href="#">公告</a>
+				</li>
+				<li>
+					<a href="#">规则</a>
+				</li>
+				<li>
+					<a href="#">论坛</a>
+				</li>
+				<li>
+					<a href="#">安全</a>
+				</li>
+				<li class="select">
+					<a href="#">公益</a>
+				</li>
+			</ul>
+		</div>
+		<div id="notice-con" class="notice-con">
+			<div class="mod" style="display:none">
+				<ul>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mod" style="display:none">
+				<ul>
+					<li>
+					<span>[<a href="#">通知</a>]
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+					<span>[<a href="#">通知</a>]
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+					<span>[<a href="#">通知</a>]
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+					<span>[<a href="#">通知</a>]
+						<a href="#">走进无声课堂</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mod" style="display:none">
+				<ul>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mod" style="display:none">
+				<ul>
+					<li>
+					<span>[<a href="#">通知</a>]
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+					<span>[<a href="#">通知</a>]
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+					<span>[<a href="#">通知</a>]
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+					<span>[<a href="#">通知</a>]
+						<a href="#">走进无声课堂</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mod" style="display:block">
+				<ul>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+					<li>
+						<a href="#">走进无声课堂</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+		//获取鼠标滑过或点击的标签和要切换内容的元素
+		var titContain=document.getElementById('notice-tit');
+		var titles=titContain.getElementsByTagName('li');
+		var conContain=document.getElementById('notice-con');
+		divs=conContain.getElementsByTagName('div');
+		//console.log(titles);
+		/*if(titles.length!=divs.length)
+			return;*/
+		//遍历titles下的所有li
+		for (var i = 0; i < titles.length; i++) {
+			titles[i].id=i;//添加索引
+			titles[i].onmouseover=function(){
+				for (var j = 0; j<titles.length; j++) {
+					//清除所有li上的class
+					titles[j].className='';
+					divs[j].style.display='none';
+				};
+				//设置当前为高亮显示
+				this.className='select';
+				divs[this.id].style.display='block';
+			}
+
+		};
+	
+	</script>
+</body>
+</html>

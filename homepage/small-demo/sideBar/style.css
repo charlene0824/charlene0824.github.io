@@ -1,0 +1,275 @@
+#sideBar{
+	width:35px;
+	background-color: #ccc;
+	padding-top:100px;
+	position:fixed;/*生成绝对定位的元素，相对于浏览器窗口进行定位*/
+	min-height: 100%;
+	z-index:99;
+}
+
+ul{
+	list-style-type: none;
+	padding:0px;
+	margin-top:100px;
+
+}
+#sideBar .item{
+	font-size:12px;
+	font-family: 'Microsoft YaHei';
+	text-align:center;
+	margin-top:10px;
+}
+#closeBar{
+	position:absolute;
+	bottom:30px;
+	width:35px;
+	text-align: center;
+	cursor:pointer;
+}
+.nav-content{
+	width:200px;
+	position:fixed;/*会让元素脱离普通流，不占据空间*/
+	min-height:100%;
+	border:1px solid #ccc;
+	background-color: #e1e1e1;
+	opacity:0;
+	z-index:98;
+}
+.nav-con-close{
+	position: absolute;/*相对于最近的“positioned”祖先元素一个“positioned”元素是指position 值不是 static 的元素。*/
+	top:5px;
+	right:5px;
+	cursor: pointer;
+}
+.sidebar-move-left{
+	/*left:-120px;*/
+	-webkit-animation-name: smf;
+	-o-animation-name: smf;
+	animation-name: smf;
+	-webkit-animation-duration: 1s;/*动画执行时间*/
+	-o-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;/*动画执行次数*/
+	-o-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+
+}
+@keyframes smf{
+	from{
+
+		}to{
+			transform:translateX(-120px);
+		}
+}
+@-webkit-keyframes smf{
+	from{
+
+		}to{
+			transform:translateX(-120px);
+		}
+}
+
+
+
+.closeBar-move-right{
+	/*left:160px;*/
+	-webkit-animation-name: cmr;
+	-o-animation-name: cmr;
+	animation-name: cmr;
+	-webkit-animation-duration: 1s;/*动画执行时间*/
+	-o-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;/*动画执行次数*/
+	-o-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+}
+@keyframes cmr{
+	from{
+
+		}to{
+			/* transform:translateX(160px);
+			transform:rotate(405deg);
+			transform:scale(1.5); */
+			 -webkit-transform:translateX(160px) rotate(405deg) scale(1.5);
+					
+			transform:translateX(160px) rotate(405deg) scale(1.5); 
+		}
+}
+@-webkit-keyframes cmr{
+	from{
+
+		}to{
+			/* transform:translateX(160px);
+			transform:rotate(405deg);
+			transform:scale(1.5); */
+			 -webkit-transform:translateX(160px) rotate(405deg) scale(1.5);
+					
+			transform:translateX(160px) rotate(405deg) scale(1.5);
+				
+		}
+} 
+.sidebar-move-right{
+	-webkit-animation-name: smr;
+	-o-animation-name: smr;
+	animation-name: smr;
+	-webkit-animation-duration: 1s;/*动画执行时间*/
+	-o-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;/*动画执行次数*/
+	-o-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+}
+
+@keyframes smr{
+	from{
+
+		}to{
+			transform:translateX(120px);
+		}
+}
+@-webkit-keyframes smr{
+	from{
+
+		}to{
+			transform:translateX(120px);
+		}
+}
+.closeBar-move-left{
+	-webkit-animation-name: cml;
+	-o-animation-name: cml;
+	animation-name: cml;
+	-webkit-animation-duration: 1s;/*动画执行时间*/
+	-o-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;/*动画执行次数*/
+	-o-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+}
+@keyframes cml{
+	from{
+		transform:scale(1.5);
+		}to{
+			/* transform:translateX(160px);
+			transform:rotate(405deg);
+			transform:scale(1.5); */
+			 -webkit-transform:translateX(-160px) rotate(-450deg) scale(1);
+					
+			transform:translateX(-160px) rotate(-405deg) scale(1); 
+		}
+}
+@-webkit-keyframes cml{
+	from{
+		transform:scale(1.5);
+		}to{
+			/* transform:translateX(160px);
+			transform:rotate(405deg);
+			transform:scale(1.5); */
+			 -webkit-transform:translateX(-160px) rotate(-450deg) scale(1);
+					
+				
+		}
+} 
+.menuContent-move-right{
+	-webkit-animation-name: mmr;
+	-o-animation-name: mmr;
+	animation-name: mmr;
+	-webkit-animation-duration: .5s;/*动画执行时间*/
+	-o-animation-duration: .5s;
+	animation-duration: .5s;
+	-webkit-animation-iteration-count: 1;/*动画执行次数*/
+	-o-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+}
+@keyframes mmr{
+	from{
+		opacity: 0;
+		}to{
+			opacity:1;
+			transform:translateX(120px);
+		}
+}
+@-webkit-keyframes mmr{
+	from{
+		opacity:0;
+		}to{
+			opacity:1;
+			transform:translateX(120px);
+		}
+}
+
+.menuContent-move-left{
+	-webkit-animation-name: mml;
+	-o-animation-name: mml;
+	animation-name: mml;
+	-webkit-animation-duration: .5s;/*动画执行时间*/
+	-o-animation-duration: .5s;
+	animation-duration: .5s;
+	-webkit-animation-iteration-count: 1;/*动画执行次数*/
+	-o-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+}
+@keyframes mml{
+	from{
+		opacity: 1;
+		}to{
+			opacity:0;
+			transform:translateX(-120px);
+		}
+}
+@-webkit-keyframes mml{
+	from{
+		opacity:1;
+		}to{
+			opacity:0;
+			transform:translateX(-120px);
+		}
+}
+
+.menuContent-move-up{
+	-webkit-animation-name: mmu;
+	-o-animation-name: mmu;
+	animation-name: mmu;
+	-webkit-animation-duration: .5s;/*动画执行时间*/
+	-o-animation-duration: .5s;
+	animation-duration: .5s;
+	-webkit-animation-iteration-count: 1;/*动画执行次数*/
+	-o-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+	-o-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+}
+@keyframes mmu{
+	from{
+		opacity: 0;
+		}to{
+			opacity:1;
+			transform:translateY(-250px);
+		}
+}
+@-webkit-keyframes mmu{
+	from{
+		opacity:0;
+		}to{
+			opacity:1;
+			transform:translateX(-250px);
+		}
+}
