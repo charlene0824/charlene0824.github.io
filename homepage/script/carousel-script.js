@@ -107,8 +107,8 @@
 	Carousel.calculateSlides = function(elem){
 		self.slides = self.container.getElementsByTagName("li");
 		
-		var slideWidth = document.defaultView.getComputedStyle(elem,null).width||elem.currentStyle.width;
-		var slideHeight = document.defaultView.getComputedStyle(elem,null).height||elem.currentStyle.height;
+		var slideWidth = $(elem).css('width');
+		var slideHeight = $(elem).css('height');
 		console.log("slideWidth="+slideWidth);
 		console.log("slideHeight="+slideHeight);
 		
