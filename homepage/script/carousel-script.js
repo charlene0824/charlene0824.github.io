@@ -107,8 +107,8 @@
 	Carousel.calculateSlides = function(elem){
 		self.slides = self.container.getElementsByTagName("li");
 		
-		var slideWidth = $(elem).css('width');
-		var slideHeight = $(elem).css('height');
+		var slideWidth = $('.banner').css('width');
+		var slideHeight = $('.banner').css('height');
 		console.log("slideWidth="+slideWidth);
 		console.log("slideHeight="+slideHeight);
 		
@@ -150,7 +150,7 @@
 			//点击span元素时 出现相应的图片 并改变相应span的背景色
 			var target = e.target;
 			if ((target.tagName).toLowerCase()=="span") {
-			
+				console.log(target.getAttribute("index"));
 				self.index = parseInt(target.getAttribute("index"));
 				Carousel.navStyle();
 				Carousel.animate(self.container, parseInt(-100*parseInt(self.index)));
@@ -244,11 +244,11 @@
 			interval = setInterval(function(){
 
 				if ((parseFloat(speed)> 0 && parseFloat(self.container.style.left)< parseFloat(end))||(parseFloat(speed) < 0 && parseFloat(self.container.style.left) > parseFloat(end))){
-					console.log('first');
+				
 					self.container.style.left = (parseFloat(self.container.style.left)+parseFloat(speed))+"%" ;
 
 				}else{
-					console.log('second');
+				
 					clearInterval(interval);
 
 					//当偏移量大于-600或小于-3000时的处理方式
@@ -256,9 +256,9 @@
 
 
               self.container.style.left = (-100) * (self.total)+"%";
-              console.log(self.container.style.left);
+   
           }
-          console.log(parseInt(self.container.style.left)< parseInt(-100 * (self.total+1)))
+
           if(parseInt(self.container.style.left)< parseInt(-100 * (self.total))) {
 
 
