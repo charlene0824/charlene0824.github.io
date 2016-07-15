@@ -1,6 +1,8 @@
 *{
 	padding:0px;
 	margin:0px;
+	font-size:14px;
+	font-family:'Microsoft Yahei';
 }
 .header-title{
 	background-color:#eee;
@@ -35,6 +37,9 @@
 }
 .ahref a:hover{
 	color:#0E7214;
+}
+.ahref a:visited{
+	color:#5FA66D;
 }
 .display-one{
 	background-image:url('images/uidisplay.png');
