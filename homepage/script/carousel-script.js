@@ -118,11 +118,11 @@
 		self.container.style.width = (self.currentTotal *100) + '%';
 		for(var k = 0; k < self.currentTotal; k++){
 			self.slides[k].style.width = (100/self.currentTotal) + '%';
-			console.log(self.slides[k].style.width);
+			
 		}
 
 		self.container.style.left = "-100%";
-		console.log(self.container.style.left);
+	
 		
 	}
 	/**
