@@ -112,8 +112,8 @@
 		console.log("slideWidth="+slideWidth);
 		console.log("slideHeight="+slideHeight);
 		
-		elem.style.width = slideWidth;
-		elem.style.height = slideHeight;
+		/*elem.style.width = slideWidth;
+		elem.style.height = slideHeight;*/
 		self.currentTotal = self.slides.length;
 		self.container.style.width = (self.currentTotal *100) + '%';
 		for(var k = 0; k < self.currentTotal; k++){
