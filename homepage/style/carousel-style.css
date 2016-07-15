@@ -39,7 +39,7 @@
 		float:left;
 		list-style-type: none;
 		/*width:600px;*/
-		
+	        display:inline-block;	
 	}
 .banner nav{
 		display: inline-block;
