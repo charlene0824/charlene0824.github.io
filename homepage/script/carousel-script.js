@@ -93,7 +93,7 @@
 		//检查是否为相对或者绝对定位
 		var position = document.defaultView.getComputedStyle(elem,null).position||elem.currentStyle.position;
 		if(position === 'static') {
-			elem.style.position = relative;
+			elem.style.position = "relative";
 		}
 		elem.style.overflow = "hidden";
 
