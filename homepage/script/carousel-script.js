@@ -106,10 +106,12 @@
 	 */
 	Carousel.calculateSlides = function(elem){
 		self.slides = self.container.getElementsByTagName("li");
-		var sliderWidth = self.slides[0].getElementsByTagName('img')[0].offsetWidth;
-		console.log(sliderWidth);
-	/*	var slideWidth = document.defaultView.getComputedStyle(elem,null).width||elem.currentStyle.width;
-		var slideHeight = document.defaultView.getComputedStyle(elem,null).height||elem.currentStyle.height;*/
+		
+		var slideWidth = document.defaultView.getComputedStyle(elem,null).width||elem.currentStyle.width;
+		var slideHeight = document.defaultView.getComputedStyle(elem,null).height||elem.currentStyle.height;
+		console.log("slideWidth="+slideWidth);
+		console.log("slideHeight="+slideHeight);
+		
 		elem.style.width = slideWidth;
 		elem.style.height = slideHeight;
 		self.currentTotal = self.slides.length;
