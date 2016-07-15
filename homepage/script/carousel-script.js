@@ -107,8 +107,8 @@
 	Carousel.calculateSlides = function(elem){
 		self.slides = self.container.getElementsByTagName("li");
 		
-		var slideWidth = $('.banner').css('width');
-		var slideHeight = $('.banner').css('height');
+		var slideWidth = $('.carousel-banner').css('width');
+		var slideHeight = $('.carousel-banner').css('height');
 		console.log("slideWidth="+slideWidth);
 		console.log("slideHeight="+slideHeight);
 		
