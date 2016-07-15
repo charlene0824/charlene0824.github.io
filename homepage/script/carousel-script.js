@@ -150,7 +150,7 @@
 			//点击span元素时 出现相应的图片 并改变相应span的背景色
 			var target = e.target;
 			if ((target.tagName).toLowerCase()=="span") {
-				console.log(target.getAttribute("index"));
+			
 				self.index = parseInt(target.getAttribute("index"));
 				Carousel.navStyle();
 				Carousel.animate(self.container, parseInt(-100*parseInt(self.index)));
