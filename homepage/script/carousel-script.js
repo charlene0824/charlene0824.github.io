@@ -106,7 +106,7 @@
 	 */
 	Carousel.calculateSlides = function(elem){
 		self.slides = self.container.getElementsByTagName("li");
-		var sliderWidth = self.slides.getElementsBuTagName('img')[0].offsetWidth;
+		var sliderWidth = self.slides.getElementsByTagName('img')[0].offsetWidth;
 		console.log(sliderWidth);
 	/*	var slideWidth = document.defaultView.getComputedStyle(elem,null).width||elem.currentStyle.width;
 		var slideHeight = document.defaultView.getComputedStyle(elem,null).height||elem.currentStyle.height;*/
