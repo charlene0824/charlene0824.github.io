@@ -106,8 +106,10 @@
 	 */
 	Carousel.calculateSlides = function(elem){
 		self.slides = self.container.getElementsByTagName("li");
-		var slideWidth = document.defaultView.getComputedStyle(elem,null).width||elem.currentStyle.width;
-		var slideHeight = document.defaultView.getComputedStyle(elem,null).height||elem.currentStyle.height;
+		var sliderWidth = self.slides.getElementsBuTagName('img')[0].offsetWidth;
+		console.log(sliderWidth);
+	/*	var slideWidth = document.defaultView.getComputedStyle(elem,null).width||elem.currentStyle.width;
+		var slideHeight = document.defaultView.getComputedStyle(elem,null).height||elem.currentStyle.height;*/
 		elem.style.width = slideWidth;
 		elem.style.height = slideHeight;
 		self.currentTotal = self.slides.length;
@@ -232,17 +234,13 @@
 		self.flag = true;
 		var length = parseInt(end)-parseInt(self.container.style.left);
 		var speed = 0;
-		console.log("end"+ end);
 		var aniStyle = self.options.animation;
-		console.log(length/100);
 		speed = ((length/100)*parseInt(self.options.speed))+"%"
 		var interval = null
 			clearInterval(interval);
 			
 			interval = setInterval(function(){
-				console.log((parseFloat(self.container.style.left) ));
-				console.log(speed);
-				console.log( parseFloat(self.container.style.left) > parseFloat(end));
+
 				if ((parseFloat(speed)> 0 && parseFloat(self.container.style.left)< parseFloat(end))||(parseFloat(speed) < 0 && parseFloat(self.container.style.left) > parseFloat(end))){
 					console.log('first');
 					self.container.style.left = (parseFloat(self.container.style.left)+parseFloat(speed))+"%" ;
@@ -253,14 +251,14 @@
 
 					//当偏移量大于-600或小于-3000时的处理方式
           if(parseFloat(self.container.style.left) > parseFloat("-100%")){
-          	console.log("大于100%的情况");
+
 
               self.container.style.left = (-100) * (self.total)+"%";
               console.log(self.container.style.left);
           }
           console.log(parseInt(self.container.style.left)< parseInt(-100 * (self.total+1)))
           if(parseInt(self.container.style.left)< parseInt(-100 * (self.total))) {
-          	console.log('小于600%');
+
 
              self.container.style.left = "-100%";
           }
