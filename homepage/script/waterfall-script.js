@@ -83,5 +83,5 @@ function checkScrollSlide(){
 	
 	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
 	var height=document.documentElement.clientHeight||document.body.clientHeight;
-	return (lastBoxH<scrollTop+clientHeight)?true:false;
+	return (lastBoxH<scrollTop+height)?true:false;
 }
