@@ -31,7 +31,8 @@ function waterfall(parent,box){
 	var oBoxs=getByClass(oParent,box);
 	//计算整个页面显示的列数（页面宽/box的宽)
 	var oBoxW=oBoxs[0].offsetWidth;
-	var cols=Math.floor(document.documentElement.clientWidth/oBoxW);
+	var clientW = document.documentElement.clientWidth || document.body.clientWidth;
+	var cols=Math.floor(clientW/oBoxW);
 	//设置main的宽度
 	oParent.style.cssText='width:'+oBoxW*cols+'px;margin:0 auto';
 	//存放每列高度的数组
@@ -79,6 +80,7 @@ function checkScrollSlide(){
 	var oParent=document.getElementById("main");
 	var oBoxs=getByClass(oParent,'box');
 	var lastBoxH=oBoxs[oBoxs.length-1].offsetTop+Math.floor(oBoxs[oBoxs.length-1]/2);
+	
 	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
 	var height=document.documentElement.clientHeight||document.body.clientHeight;
 	return (lastBoxH<scrollTop+clientHeight)?true:false;
