@@ -148,6 +148,28 @@ app.config(['$routeProvider',function($routeProvider){
 
 
 }])
+app.directive('anContainer', ['$window', function($window) {
+return {
+    link: function(scope, elem, attrs) {
+        scope.onResize = function() {
+            var header = document.getElementsByClassName('main-container')[0];
+            elem.windowHeight = $window.innerHeight - header.clientHeight - 80;
+            $(elem).height(elem.windowHeight);                
+
+        }
+        scope.onResize();
+        angular.element($window).bind('resize', function() {
+            scope.onResize();
+        })
+        //below function will call on view change in ng-view 
+        element.on('load', function(){
+           $scope.$apply(function(){
+              scope.onResize();
+           })
+        })
+    }}
+}])
+
 app.controller('firstController',function($scope){
 		$scope.classname = 'first';
 })
