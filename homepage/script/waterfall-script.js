@@ -4,7 +4,7 @@
 	//拖动滚动条时触发的事件
 	var dataInt={"data":[{"src":"0.jpg"},{"src":"1.jpg"},{"src":"2.jpg"},{"src":"3.jpg"}]};
 	window.onscroll=function(){
-		if(checkScrollSlide()){
+		if(checkScrollSlide){
 			//将数据块渲染到文档底部
 			for (var i = 0; i < dataInt.data.length; i++) {
 				var oParent=document.getElementById("main");
